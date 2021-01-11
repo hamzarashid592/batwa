@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         var navHost: NavHostFragment=supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController=navHost.findNavController()
 
-//        Initializing the app bar configuation.
+//        Initializing the app bar configuration.
         appBarConfiguration= AppBarConfiguration(setOf(R.id.homeFragment), drawer_layout)
 
 //        Setting the default action bar
