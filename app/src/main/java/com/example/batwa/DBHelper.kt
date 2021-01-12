@@ -15,7 +15,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
     companion object {
 
         val DB_NAME = "BatwaDB"
-        val DB_VERSION = 2
+        val DB_VERSION = 5
 
         val ACCOUNT_TABLE = "Account"
         val COL_ACCOUNT_ID = "AccountID"
@@ -50,6 +50,54 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
 //            Creating the alter_balance trigger that will be fired on the account table
 //            whenever a transaction would be added.
             createTrigger(TRIGGER_ALTER_BALANCE, db)
+
+//            Adding a test account for a fresh app install.
+            addTestAccountRecord(Account(500.0, "My Batwa", null, 0), db)
+            addTestAccountRecord(Account(500.0, "My Second Batwa", null, 0), db)
+            addTestAccountRecord(Account(500.0, "My Third Batwa", null, 0), db)
+            addTestAccountRecord(Account(500.0, "My Fourth Batwa", null, 0), db)
+
+//            Adding some test transactions for fresh app install.
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    500.0,"Income",1,"Welcome the batwa app"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    500.0,"Expense",1,"This is an expense"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",1,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",1,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",1,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    500.0,"Income",2,"Welcome the batwa app"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    500.0,"Expense",2,"This is an expense"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",2,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",2,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",2,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    500.0,"Income",3,"Welcome the batwa app"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    500.0,"Expense",3,"This is an expense"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",3,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",3,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",3,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    500.0,"Income",4,"Welcome the batwa app"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    500.0,"Expense",4,"This is an expense"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",4,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",4,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",4,"That's how you do it"),db)
 
 
         }
@@ -134,6 +182,28 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
 
 //        Executing the query
         db.execSQL("Drop trigger if exists $triggerName")
+    }
+
+
+    private fun addTestAccountRecord(accountRecord: Account, db: SQLiteDatabase) {
+        val contentValues = ContentValues()
+        contentValues.put(COL_ACCOUNT_NAME, accountRecord.accountName)
+        contentValues.put(COL_ACCOUNT_BALANCE, accountRecord.accountBalance)
+        contentValues.put(COL_ACCOUNT_NUM_RECORDS, accountRecord.accountNumRecords)
+        db.insert(ACCOUNT_TABLE, null, contentValues)
+        Toast.makeText(context, "Account ${accountRecord.accountName} added successfully", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun addTestTransactionRecord(transactionRecord: Transaction,db: SQLiteDatabase) {
+        val contentValues = ContentValues()
+        contentValues.put(COL_TRANSACTION_AMOUNT, transactionRecord.transactionAmount)
+        contentValues.put(COL_TRANSACTION_COMMENTS, transactionRecord.transactionComments)
+        contentValues.put(COL_TRANSACTION_DATE, transactionRecord.transactionDate)
+        contentValues.put(COL_TRANSACTION_TIME, transactionRecord.transactionTime)
+        contentValues.put(COL_TRANSACTION_TYPE, transactionRecord.transactionType)
+        contentValues.put(COL_ACCOUNT_ID, transactionRecord.accountID)
+        db.insert(TRANSACTION_TABLE, null, contentValues)
+        Toast.makeText(context, "Transaction added successfully", Toast.LENGTH_SHORT).show()
     }
 
 

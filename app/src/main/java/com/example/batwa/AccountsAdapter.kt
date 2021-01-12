@@ -22,6 +22,9 @@ class AccountsAdapter(
                 Toast.makeText(context,"NumRecords ${accounts[pos].accountNumRecords} at pos $pos", Toast.LENGTH_SHORT).show()
             }
         }
+
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {
