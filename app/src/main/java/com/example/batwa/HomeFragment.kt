@@ -49,7 +49,9 @@ class HomeFragment : Fragment() {
 //        Fetching the transaction details
         transactionList=dbHelper.getTransactionRecord()
 
-//        Passing the account details to the adapter
+//        Passing the account details to the adapter to be displayed as cards
+//        But first we have to set the type of the account records.
+
         val accountsLayoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
         accounts_recycler_view.layoutManager=accountsLayoutManager
         accounts_recycler_view.adapter= context?.let { AccountsAdapter(it,accountList) }

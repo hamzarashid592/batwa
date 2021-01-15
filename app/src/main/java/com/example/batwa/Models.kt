@@ -1,11 +1,17 @@
 package com.example.batwa
 
-data class Account (
+class Account (
         var accountBalance: Double = 0.0,
         var accountName: String = "",
         var accountID : Int? = 0,
-        var accountNumRecords : Int = 0
-)
+        var accountNumRecords : Int = 0,
+        var type : Int =0
+){
+    companion object{
+        val ACCOUNT_CARD=0
+        val ACCOUNT_LIST=1
+    }
+}
 
 data class Transaction(
 
