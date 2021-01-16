@@ -21,6 +21,15 @@
 
             ></TextView>
 
+        <TextView
+            android:id="@+id/text_view_account_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance: PKR 200"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textColor="@android:color/holo_red_dark"
+            ></TextView>
+
     </LinearLayout>
 
 

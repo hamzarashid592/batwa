@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +45,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        Creating an onclick listener on the accounts cog wheel.
+        icon_accounts_settings.setOnClickListener {
+            var navDirections=HomeFragmentDirections.actionHomeFragmentToAccountsSettingsFragment()
+            findNavController().navigate(navDirections)
+        }
+
+
 //        Fetching the account details.
         accountList= dbHelper.getAccountRecord()
 
@@ -50,8 +59,6 @@ class HomeFragment : Fragment() {
         transactionList=dbHelper.getTransactionRecord()
 
 //        Passing the account details to the adapter to be displayed as cards
-//        But first we have to set the type of the account records.
-
         val accountsLayoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
         accounts_recycler_view.layoutManager=accountsLayoutManager
         accounts_recycler_view.adapter= context?.let { AccountsAdapter(it,accountList) }

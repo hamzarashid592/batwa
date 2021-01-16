@@ -15,7 +15,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
     companion object {
 
         val DB_NAME = "BatwaDB"
-        val DB_VERSION = 5
+        val DB_VERSION = 6
 
         val ACCOUNT_TABLE = "Account"
         val COL_ACCOUNT_ID = "AccountID"

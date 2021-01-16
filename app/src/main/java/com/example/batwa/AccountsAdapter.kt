@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.lo_account_list.view.*
+import kotlinx.android.synthetic.main.lo_account_settings.view.*
 import kotlinx.android.synthetic.main.lo_account_card.view.*
-import kotlinx.android.synthetic.main.lo_account_list.view.text_view_account_balance as text_view_account_balance1
-import kotlinx.android.synthetic.main.lo_account_list.view.text_view_account_name as text_view_account_name1
+import kotlinx.android.synthetic.main.lo_account_list.view.*
+import kotlinx.android.synthetic.main.lo_account_settings.view.text_view_account_balance as text_view_account_balance1
+import kotlinx.android.synthetic.main.lo_account_settings.view.text_view_account_name as text_view_account_name1
 import kotlinx.android.synthetic.main.lo_account_card.view.text_view_account_balance as text_view_account_balance2
 import kotlinx.android.synthetic.main.lo_account_card.view.text_view_account_name as text_view_account_name2
+import kotlinx.android.synthetic.main.lo_account_list.view.text_view_account_name as text_view_account_name3
 
 class AccountsAdapter(
         private val context: Context,
@@ -59,7 +61,7 @@ class AccountsAdapter(
                 return AccountCardViewHolder(view)
             }
             Account.ACCOUNT_LIST -> {
-                view = LayoutInflater.from(context).inflate(R.layout.lo_account_list, parent, false)
+                view = LayoutInflater.from(context).inflate(R.layout.lo_account_settings, parent, false)
                 return AccountListViewHolder(view)
             }
             else->{
@@ -82,8 +84,8 @@ class AccountsAdapter(
                 (holder as AccountCardViewHolder).itemView.text_view_account_balance2.text = "PKR ${accounts[position].accountBalance.toString()}"
             }
             Account.ACCOUNT_LIST->{
-                (holder as AccountCardViewHolder).itemView.text_view_account_name1.text = accounts[position].accountName
-                (holder as AccountCardViewHolder).itemView.text_view_account_balance1.text = "PKR ${accounts[position].accountBalance.toString()}"
+                (holder as AccountListViewHolder).itemView.text_view_account_name1.text = accounts[position].accountName
+                (holder as AccountListViewHolder).itemView.text_view_account_balance1.text = "PKR ${accounts[position].accountBalance.toString()}"
             }
         }
 

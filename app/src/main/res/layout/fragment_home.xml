@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:scrollbars="none">
 
 
@@ -10,26 +10,26 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".HomeFragment"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="10dp"
+        tools:context=".HomeFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingVertical="5dp"
-            android:gravity="center_vertical">
+            android:layout_marginVertical="10dp">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="List of Accounts"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                ></TextView>
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"></TextView>
 
             <ImageView
+                android:id="@+id/icon_accounts_settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_settings_24"></ImageView>
@@ -37,22 +37,20 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/accounts_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/accounts_recycler_view"
-            android:layout_marginTop="5dp"
-            android:nestedScrollingEnabled="false">
-        </androidx.recyclerview.widget.RecyclerView>
+            android:nestedScrollingEnabled="false"></androidx.recyclerview.widget.RecyclerView>
 
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rectangle_stroke"
-            android:padding="5dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="5dp">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,10 +69,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            app:cardCornerRadius="20dp"
-            app:cardElevation="5dp"
-            android:layout_marginVertical="20dp">
+            android:layout_marginVertical="20dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,17 +82,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginVertical="10dp"
                     android:gravity="center_vertical"
-                    android:layout_marginVertical="5dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="Recent Transactions"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        ></TextView>
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"></TextView>
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -105,30 +101,26 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/transactions_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/transactions_recycler_view"
-                    android:nestedScrollingEnabled="false">
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:nestedScrollingEnabled="false"></androidx.recyclerview.widget.RecyclerView>
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Show More"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                    android:textStyle="bold"
                     android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
                     android:textColor="?attr/colorPrimary"
-                    ></TextView>
+                    android:textStyle="bold"></TextView>
 
 
             </LinearLayout>
 
 
-
         </androidx.cardview.widget.CardView>
-
 
 
     </LinearLayout>

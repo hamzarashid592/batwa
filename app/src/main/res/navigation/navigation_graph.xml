@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_homeFragment_to_recordsFragment"
             app:destination="@id/recordsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_accountsSettingsFragment"
+            app:destination="@id/accountsSettingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/recordsFragment"
         android:name="com.example.batwa.RecordsFragment"
         android:label="Records"
         tools:layout="@layout/fragment_records" />
+    <fragment
+        android:id="@+id/accountsSettingsFragment"
+        android:name="com.example.batwa.AccountsSettingsFragment"
+        android:label="Accounts Settings" />
 </navigation>
