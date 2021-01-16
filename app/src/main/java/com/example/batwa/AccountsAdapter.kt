@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.lo_account_settings.view.*
 import kotlinx.android.synthetic.main.lo_account_card.view.*
@@ -26,7 +27,8 @@ class AccountsAdapter(
 
         init {
             itemView.setOnClickListener {
-                Toast.makeText(context, "NumRecords ${accounts[pos].accountNumRecords} at pos $pos", Toast.LENGTH_SHORT).show()
+                var navDirections= HomeFragmentDirections.actionHomeFragmentToRecordsEntryFragment()
+                it.findNavController().navigate(navDirections)
             }
         }
     }
