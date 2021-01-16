@@ -33,6 +33,16 @@ class AccountsAdapter(
         }
     }
 
+    inner class AccountSettingsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var pos = 0
+
+        init {
+            itemView.setOnClickListener {
+                Toast.makeText(context, "NumRecords ${accounts[pos].accountNumRecords} at pos $pos", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     inner class AccountListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var pos = 0
 
@@ -49,6 +59,7 @@ class AccountsAdapter(
         when (accounts[position].type) {
             0 -> return Account.ACCOUNT_CARD
             1 -> return Account.ACCOUNT_LIST
+            2 -> return Account.ACCOUNT_SETTINGS
         }
         return 0
     }
@@ -62,9 +73,15 @@ class AccountsAdapter(
                 view = LayoutInflater.from(context).inflate(R.layout.lo_account_card, parent, false)
                 return AccountCardViewHolder(view)
             }
+
             Account.ACCOUNT_LIST -> {
-                view = LayoutInflater.from(context).inflate(R.layout.lo_account_settings, parent, false)
+                view = LayoutInflater.from(context).inflate(R.layout.lo_account_list, parent, false)
                 return AccountListViewHolder(view)
+            }
+
+            Account.ACCOUNT_SETTINGS -> {
+                view = LayoutInflater.from(context).inflate(R.layout.lo_account_settings, parent, false)
+                return AccountSettingsViewHolder(view)
             }
             else->{
                 view = LayoutInflater.from(context).inflate(R.layout.lo_account_card, parent, false)
@@ -85,9 +102,14 @@ class AccountsAdapter(
                 (holder as AccountCardViewHolder).itemView.text_view_account_name2.text = accounts[position].accountName
                 (holder as AccountCardViewHolder).itemView.text_view_account_balance2.text = "PKR ${accounts[position].accountBalance.toString()}"
             }
+
             Account.ACCOUNT_LIST->{
-                (holder as AccountListViewHolder).itemView.text_view_account_name1.text = accounts[position].accountName
-                (holder as AccountListViewHolder).itemView.text_view_account_balance1.text = "PKR ${accounts[position].accountBalance.toString()}"
+                (holder as AccountListViewHolder).itemView.text_view_account_name3.text = accounts[position].accountName
+            }
+
+            Account.ACCOUNT_SETTINGS->{
+                (holder as AccountSettingsViewHolder).itemView.text_view_account_name1.text = accounts[position].accountName
+                (holder as AccountSettingsViewHolder).itemView.text_view_account_balance1.text = "PKR ${accounts[position].accountBalance.toString()}"
             }
         }
 

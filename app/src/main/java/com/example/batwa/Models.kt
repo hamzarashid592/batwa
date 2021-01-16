@@ -10,6 +10,8 @@ class Account (
     companion object{
         val ACCOUNT_CARD=0
         val ACCOUNT_LIST=1
+        val ACCOUNT_SETTINGS=2
+
     }
 }
 

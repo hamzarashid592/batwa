@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_accounts_settings.*
 
 
-class AccountsSettingsFragment : Fragment() {
+class AccountsListFragment : Fragment() {
 
     private lateinit var dbHelper : DBHelper
     private var accountsList=ArrayList<Account>()
@@ -32,7 +32,7 @@ class AccountsSettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_accounts_settings, container, false)
+        return inflater.inflate(R.layout.fragment_accounts_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +42,7 @@ class AccountsSettingsFragment : Fragment() {
         accountsList=dbHelper.getAccountRecord()
 
 //        Setting the type of the accounts to list.
-        accountsList.forEach { it.type=Account.ACCOUNT_SETTINGS }
+        accountsList.forEach { it.type=Account.ACCOUNT_LIST }
 
 //        Putting the data in the adapter
 
