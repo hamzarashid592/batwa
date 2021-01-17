@@ -98,6 +98,8 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
                     100.0,"Expense",4,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
                     100.0,"Expense",4,"That's how you do it"),db)
+            addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
+                    100.0,"Expense",4,"That's how you do it"),db)
 
 
         }
@@ -207,7 +209,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
     }
 
 
-    fun getAccountRecord(): ArrayList<Account> {
+    fun getAccountRecordList(): ArrayList<Account> {
 
         val accountList = ArrayList<Account>()
 
@@ -236,6 +238,38 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
 
         db.close()
         return accountList
+    }
+
+    fun getAccountRecordMap(): HashMap<Int,Account> {
+
+        val accountMap = HashMap<Int,Account>()
+
+        val db: SQLiteDatabase = readableDatabase
+
+        if (db != null) {
+            val cursor: Cursor = db.rawQuery("Select * from $ACCOUNT_TABLE", null)
+
+//            If no data in the table
+            if (cursor.count == 0)
+                Toast.makeText(context, "No accounts created", Toast.LENGTH_SHORT).show()
+
+            while (cursor.moveToNext()) {
+                val account = Account()
+                account.accountID = cursor.getInt(cursor.getColumnIndex(COL_ACCOUNT_ID))
+                account.accountName = cursor.getString(cursor.getColumnIndex(COL_ACCOUNT_NAME))
+                account.accountBalance =
+                        cursor.getDouble(cursor.getColumnIndex(COL_ACCOUNT_BALANCE))
+                account.accountNumRecords =
+                        cursor.getInt(cursor.getColumnIndex(COL_ACCOUNT_NUM_RECORDS))
+
+//              The not null operator is for the case when accountID would be null which will never happen.
+                accountMap.put(account.accountID!!,account)
+            }
+            cursor.close()
+        }
+
+        db.close()
+        return accountMap
     }
 
     fun addAccountRecord(accountRecord: Account) {

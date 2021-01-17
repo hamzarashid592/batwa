@@ -39,7 +39,7 @@ class AccountsSettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //        Fetching the account details.
-        accountsList=dbHelper.getAccountRecord()
+        accountsList=dbHelper.getAccountRecordList()
 
 //        Setting the type of the accounts to list.
         accountsList.forEach { it.type=Account.ACCOUNT_SETTINGS }

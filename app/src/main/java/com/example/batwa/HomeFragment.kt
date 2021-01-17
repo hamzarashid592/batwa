@@ -20,6 +20,7 @@ class HomeFragment : Fragment() {
 
 
     private var accountList=ArrayList<Account>()
+    private var accountMap=HashMap<Int,Account>()
     private var transactionList=ArrayList<Transaction>()
     private lateinit var dbHelper : DBHelper
 
@@ -51,21 +52,34 @@ class HomeFragment : Fragment() {
             findNavController().navigate(navDirections)
         }
 
+//        Code for the show more button that will start the transactions fragment
+        text_view_show_more_transactions.setOnClickListener {
+            var navDirections=HomeFragmentDirections.actionHomeFragmentToTransactionsFragment()
+            findNavController().navigate(navDirections)
+        }
 
-//        Fetching the account details.
-        accountList= dbHelper.getAccountRecord()
 
-//        Fetching the transaction details
+//        Fetching the account details to be displayed on the main screen as list..
+        accountList= dbHelper.getAccountRecordList()
+
+//        Fetching the transaction details to be displayed on the main screen.
         transactionList=dbHelper.getTransactionRecord()
 
-//        Passing the account details to the adapter to be displayed as cards
+//        Fetching the accounts map to be passed on with the transactions.
+        accountMap=dbHelper.getAccountRecordMap()
+
+        Log.d("hamza","No of transactions ${transactionList.size}")
+
+//        Passing the account details to the adapter to be displayed as cards in the main screen.
         val accountsLayoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
         accounts_recycler_view.layoutManager=accountsLayoutManager
         accounts_recycler_view.adapter= context?.let { AccountsAdapter(it,accountList) }
 
-//        Passing the transaction details to the adpater.
+//        Passing the transaction details to the adapter to be displayed on the main screen.
         val transactionsLayoutManager= LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-        transactions_recycler_view.layoutManager=transactionsLayoutManager
-        transactions_recycler_view.adapter= context?.let { TransactionsAdapter(it,transactionList,dbHelper.getAccountNames()) }
+        main_screen_transactions_recycler_view.layoutManager=transactionsLayoutManager
+        main_screen_transactions_recycler_view.adapter= context?.let { TransactionsAdapter(it,transactionList,accountMap) }
+
+
     }
 }

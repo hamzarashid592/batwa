@@ -27,8 +27,6 @@ class AccountsAdapter(
 
         init {
             itemView.setOnClickListener {
-                var navDirections= HomeFragmentDirections.actionHomeFragmentToRecordsEntryFragment()
-                it.findNavController().navigate(navDirections)
             }
         }
     }

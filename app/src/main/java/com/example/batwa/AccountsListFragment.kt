@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_accounts_list.*
 import kotlinx.android.synthetic.main.fragment_accounts_settings.*
 
 
@@ -39,7 +40,7 @@ class AccountsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //        Fetching the account details.
-        accountsList=dbHelper.getAccountRecord()
+        accountsList=dbHelper.getAccountRecordList()
 
 //        Setting the type of the accounts to list.
         accountsList.forEach { it.type=Account.ACCOUNT_LIST }
@@ -48,8 +49,8 @@ class AccountsListFragment : Fragment() {
 
         var layoutManager : RecyclerView.LayoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         var adapter: AccountsAdapter? = context?.let { AccountsAdapter(it,accountsList) }
-        accounts_settings_recycler_view.adapter=adapter
-        accounts_settings_recycler_view.layoutManager=layoutManager
+        accounts_list_recycler_view.adapter=adapter
+        accounts_list_recycler_view.layoutManager=layoutManager
 
     }
 }

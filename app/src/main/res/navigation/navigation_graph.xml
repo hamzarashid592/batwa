@@ -11,35 +11,19 @@
         android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_recordsFragment"
-            app:destination="@id/recordsFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_accountsSettingsFragment"
             app:destination="@id/accountsSettingsFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_recordsEntryFragment"
-            app:destination="@id/recordsEntryFragment" />
+            android:id="@+id/action_homeFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/recordsFragment"
-        android:name="com.example.batwa.RecordsFragment"
-        android:label="Records"
-        tools:layout="@layout/fragment_records" />
+        android:id="@+id/transactionsFragment"
+        android:name="com.example.batwa.TransactionsFragment"
+        android:label="Transactions"
+        tools:layout="@layout/fragment_transactions" />
     <fragment
         android:id="@+id/accountsSettingsFragment"
         android:name="com.example.batwa.AccountsSettingsFragment"
         android:label="Accounts Settings" />
-    <fragment
-        android:id="@+id/recordsEntryFragment"
-        android:name="com.example.batwa.RecordsEntryFragment"
-        android:label="Enter Transaction Amount" >
-        <action
-            android:id="@+id/action_recordsEntryFragment_to_accountsListFragment"
-            app:destination="@id/accountsListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/accountsListFragment"
-        android:name="com.example.batwa.AccountsListFragment"
-        android:label="fragment_accounts_list"
-        tools:layout="@layout/fragment_accounts_list" />
 </navigation>
