@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_transactionsFragment"
             app:destination="@id/transactionsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_transactionAddEditFragment"
+            app:destination="@id/transactionAddEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/transactionsFragment"
@@ -26,4 +29,9 @@
         android:id="@+id/accountsSettingsFragment"
         android:name="com.example.batwa.AccountsSettingsFragment"
         android:label="Accounts Settings" />
+    <fragment
+        android:id="@+id/transactionAddEditFragment"
+        android:name="com.example.batwa.TransactionAddEditFragment"
+        android:label="Add / Edit A Record"
+        tools:layout="@layout/fragment_transaction_add_edit" />
 </navigation>

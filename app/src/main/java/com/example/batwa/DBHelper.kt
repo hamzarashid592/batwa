@@ -59,47 +59,47 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
 
 //            Adding some test transactions for fresh app install.
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    500.0,"Income",1,"Welcome the batwa app"),db)
+                    500.0,Transaction.INCOME,1,"Welcome the batwa app"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    500.0,"Expense",1,"This is an expense"),db)
+                    500.0,Transaction.EXPENSE,1,"This is an expense"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",1,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,1,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",1,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,1,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",1,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,1,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    500.0,"Income",2,"Welcome the batwa app"),db)
+                    500.0,Transaction.INCOME,2,"Welcome the batwa app"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    500.0,"Expense",2,"This is an expense"),db)
+                    500.0,Transaction.EXPENSE,2,"This is an expense"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",2,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,2,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",2,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,2,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",2,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,2,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    500.0,"Income",3,"Welcome the batwa app"),db)
+                    500.0,Transaction.INCOME,3,"Welcome the batwa app"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    500.0,"Expense",3,"This is an expense"),db)
+                    500.0,Transaction.EXPENSE,3,"This is an expense"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",3,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,3,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",3,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,3,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",3,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,3,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    500.0,"Income",4,"Welcome the batwa app"),db)
+                    500.0,Transaction.INCOME,4,"Welcome the batwa app"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    500.0,"Expense",4,"This is an expense"),db)
+                    500.0,Transaction.EXPENSE,4,"This is an expense"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",4,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,4,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",4,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,4,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",4,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,4,"That's how you do it"),db)
             addTestTransactionRecord(Transaction(null,"12/12/2012","07:07:07 am",
-                    100.0,"Expense",4,"That's how you do it"),db)
+                    100.0,Transaction.EXPENSE,4,"That's how you do it"),db)
 
 
         }
@@ -240,6 +240,30 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
         return accountList
     }
 
+    fun getAccountNamesList(): ArrayList<String> {
+
+        val accountNameList = ArrayList<String>()
+
+        val db: SQLiteDatabase = readableDatabase
+
+        if (db != null) {
+            val cursor: Cursor = db.rawQuery("Select $COL_ACCOUNT_NAME from $ACCOUNT_TABLE", null)
+
+//            If no data in the table
+            if (cursor.count == 0)
+                Toast.makeText(context, "No accounts created", Toast.LENGTH_SHORT).show()
+
+            while (cursor.moveToNext()) {
+                val name = cursor.getString(cursor.getColumnIndex(COL_ACCOUNT_NAME))
+                accountNameList.add(name)
+            }
+            cursor.close()
+        }
+
+        db.close()
+        return accountNameList
+    }
+
     fun getAccountRecordMap(): HashMap<Int,Account> {
 
         val accountMap = HashMap<Int,Account>()
@@ -335,23 +359,23 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
         return transactionList
     }
 
-    fun getAccountNames(): HashMap<Int, String> {
-
-        var accountMap = HashMap<Int, String>()
-
-        val db = this.readableDatabase
-        if (db != null) {
-            var cursor = db.query(ACCOUNT_TABLE, arrayOf(COL_ACCOUNT_ID, COL_ACCOUNT_NAME), null, null, null, null, null)
-            while (cursor.moveToNext()) {
-                var id = cursor.getInt(cursor.getColumnIndex(COL_ACCOUNT_ID))
-                var name = cursor.getString(cursor.getColumnIndex(COL_ACCOUNT_NAME))
-                accountMap.put(id, name)
-            }
-            cursor.close()
-        }
-
-        db.close()
-
-        return accountMap
-    }
+//    fun getAccountNames(): HashMap<Int, String> {
+//
+//        var accountMap = HashMap<Int, String>()
+//
+//        val db = this.readableDatabase
+//        if (db != null) {
+//            var cursor = db.query(ACCOUNT_TABLE, arrayOf(COL_ACCOUNT_ID, COL_ACCOUNT_NAME), null, null, null, null, null)
+//            while (cursor.moveToNext()) {
+//                var id = cursor.getInt(cursor.getColumnIndex(COL_ACCOUNT_ID))
+//                var name = cursor.getString(cursor.getColumnIndex(COL_ACCOUNT_NAME))
+//                accountMap.put(id, name)
+//            }
+//            cursor.close()
+//        }
+//
+//        db.close()
+//
+//        return accountMap
+//    }
 }
