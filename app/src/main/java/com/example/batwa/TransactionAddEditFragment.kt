@@ -14,6 +14,7 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import kotlinx.android.synthetic.main.fragment_transaction_add_edit.*
+import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -62,7 +63,10 @@ class TransactionAddEditFragment : Fragment() {
                 DatePickerDialog(
                     it1,
                     DatePickerDialog.OnDateSetListener { datePicker: DatePicker, year: Int, month: Int, day: Int ->
-                        text_view_date.text = "$year/$month/$day"
+
+                        var decimalFormat=DecimalFormat("00")
+
+                        text_view_date.text = "${decimalFormat.format(day)}/${decimalFormat.format(month+1)}/$year"
                     },
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
@@ -80,10 +84,13 @@ class TransactionAddEditFragment : Fragment() {
                 TimePickerDialog(
                     it1,
                     TimePickerDialog.OnTimeSetListener() { timePicker: TimePicker, hour: Int, minute: Int ->
+
+                        var decimalFormat=DecimalFormat("00")
+
                         if(hour>12)
-                            text_view_time.text = "${hour%12}:$minute PM"
+                            text_view_time.text = "${decimalFormat.format(hour%12)}:${decimalFormat.format(minute)} PM"
                         else
-                            text_view_time.text = "${hour%12}:$minute AM"
+                            text_view_time.text = "${decimalFormat.format(hour%12)}:${decimalFormat.format(minute)} AM"
                     },
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
