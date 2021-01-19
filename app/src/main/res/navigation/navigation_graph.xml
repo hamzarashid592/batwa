@@ -20,8 +20,14 @@
             android:id="@+id/action_homeFragment_to_transactionAddEditFragment"
             app:destination="@id/transactionAddEditFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_accountAddEditFragment"
+            android:id="@+id/action_homeFragment_to_accountAddEditFragment2"
             app:destination="@id/accountAddEditFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_recordsEntryFragmentExpense"
+            app:destination="@id/recordsEntryFragmentExpense" />
+        <action
+            android:id="@+id/action_homeFragment_to_recordsEntryFragmentIncome"
+            app:destination="@id/recordsEntryFragmentIncome" />
     </fragment>
     <fragment
         android:id="@+id/transactionsFragment"
@@ -31,7 +37,11 @@
     <fragment
         android:id="@+id/accountsSettingsFragment"
         android:name="com.example.batwa.AccountsSettingsFragment"
-        android:label="Accounts Settings" />
+        android:label="Accounts Settings" >
+        <action
+            android:id="@+id/action_accountsSettingsFragment_to_accountAddEditFragment"
+            app:destination="@id/accountAddEditFragment" />
+    </fragment>
     <fragment
         android:id="@+id/transactionAddEditFragment"
         android:name="com.example.batwa.TransactionAddEditFragment"
@@ -42,4 +52,33 @@
         android:name="com.example.batwa.AccountAddEditFragment"
         android:label="Add / Edit An Acount"
         tools:layout="@layout/fragment_account_add_edit" />
+    <fragment
+        android:id="@+id/recordsEntryFragmentExpense"
+        android:name="com.example.batwa.RecordsEntryFragmentExpense"
+        android:label="fragment_records_entry_expense"
+        tools:layout="@layout/fragment_records_entry_expense" >
+        <action
+            android:id="@+id/action_recordsEntryFragmentExpense_to_transactionAddEditFragment"
+            app:destination="@id/transactionAddEditFragment" />
+        <action
+            android:id="@+id/action_recordsEntryFragmentExpense_to_accountsListFragment"
+            app:destination="@id/accountsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recordsEntryFragmentIncome"
+        android:name="com.example.batwa.RecordsEntryFragmentIncome"
+        android:label="fragment_records_entry_income"
+        tools:layout="@layout/fragment_records_entry_income" >
+        <action
+            android:id="@+id/action_recordsEntryFragmentIncome_to_transactionAddEditFragment"
+            app:destination="@id/transactionAddEditFragment" />
+        <action
+            android:id="@+id/action_recordsEntryFragmentIncome_to_accountsListFragment"
+            app:destination="@id/accountsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountsListFragment"
+        android:name="com.example.batwa.AccountsListFragment"
+        android:label="fragment_accounts_list"
+        tools:layout="@layout/fragment_accounts_list" />
 </navigation>
