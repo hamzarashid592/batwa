@@ -11,8 +11,12 @@
         android:id="@+id/transactionsFragment"
         android:icon="@drawable/ic_baseline_list_24"></item>
 
-    <item android:title="Add/Edit"
+    <item android:title="Add/Edit a record"
         android:id="@+id/transactionAddEditFragment"
+        android:icon="@drawable/ic_baseline_list_24"></item>
+
+    <item android:title="Add/Edit an Acount"
+        android:id="@+id/accountAddEditFragment"
         android:icon="@drawable/ic_baseline_list_24"></item>
 
 
