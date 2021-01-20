@@ -121,7 +121,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/gray_operations"
-                android:text="/"
+                android:text="\u00f7"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/gray_text"></androidx.appcompat.widget.AppCompatButton>
 
@@ -169,7 +169,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/gray_operations"
-                android:text="*"
+                android:text="\u2a2f"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/gray_text"></androidx.appcompat.widget.AppCompatButton>
 

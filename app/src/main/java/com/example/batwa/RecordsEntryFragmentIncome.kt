@@ -241,7 +241,6 @@ class RecordsEntryFragmentIncome : Fragment() {
                 view.text_view_account_balance_entry.text = answer.toString()
             }
 
-
         }
 
 

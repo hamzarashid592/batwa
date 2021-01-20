@@ -26,8 +26,8 @@
             android:id="@+id/action_homeFragment_to_recordsEntryFragmentExpense"
             app:destination="@id/recordsEntryFragmentExpense" />
         <action
-            android:id="@+id/action_homeFragment_to_recordsEntryFragmentIncome"
-            app:destination="@id/recordsEntryFragmentIncome" />
+            android:id="@+id/action_homeFragment_to_viewPagerFragment2"
+            app:destination="@id/viewPagerFragment2" />
     </fragment>
     <fragment
         android:id="@+id/transactionsFragment"
@@ -55,7 +55,7 @@
     <fragment
         android:id="@+id/recordsEntryFragmentExpense"
         android:name="com.example.batwa.RecordsEntryFragmentExpense"
-        android:label="fragment_records_entry_expense"
+        android:label="Add your Expense"
         tools:layout="@layout/fragment_records_entry_expense" >
         <action
             android:id="@+id/action_recordsEntryFragmentExpense_to_transactionAddEditFragment"
@@ -67,7 +67,7 @@
     <fragment
         android:id="@+id/recordsEntryFragmentIncome"
         android:name="com.example.batwa.RecordsEntryFragmentIncome"
-        android:label="fragment_records_entry_income"
+        android:label="Add your Income"
         tools:layout="@layout/fragment_records_entry_income" >
         <action
             android:id="@+id/action_recordsEntryFragmentIncome_to_transactionAddEditFragment"
@@ -81,4 +81,9 @@
         android:name="com.example.batwa.AccountsListFragment"
         android:label="fragment_accounts_list"
         tools:layout="@layout/fragment_accounts_list" />
+    <fragment
+        android:id="@+id/viewPagerFragment2"
+        android:name="com.example.batwa.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager" />
 </navigation>
