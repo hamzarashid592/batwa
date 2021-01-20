@@ -12,6 +12,7 @@
         android:id="@+id/edit_text_record_entry"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="?attr/colorPrimary"
         android:orientation="vertical"
         android:padding="20dp"
@@ -20,19 +21,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_account_balance_entry"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:enabled="false"
+            android:autoSizeTextType="uniform"
             android:gravity="end|center_vertical"
-            android:hint="121"
+            android:hint="0"
+            android:maxLines="1"
             android:textAlignment="viewEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Display4"
             android:textColor="@color/gray_numbers"
             android:textColorHint="@color/white"
             android:drawableLeft="@drawable/ic_add"
-            android:drawableTint="@color/white"></TextView>
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/white"></androidx.appcompat.widget.AppCompatTextView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,7 +122,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/gray_operations"
-                android:text="/"
+                android:text="\u00f7"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/gray_text"></androidx.appcompat.widget.AppCompatButton>
 
@@ -166,7 +170,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/gray_operations"
-                android:text="*"
+                android:text="\u2a2f"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/gray_text"></androidx.appcompat.widget.AppCompatButton>
 

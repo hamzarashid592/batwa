@@ -1,7 +1,5 @@
 package com.example.batwa
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -9,13 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.DatePicker
-import android.widget.TimePicker
 import androidx.annotation.RequiresApi
-import kotlinx.android.synthetic.main.fragment_account_add_edit.*
-import java.text.DecimalFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 

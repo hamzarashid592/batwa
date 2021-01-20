@@ -8,13 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.LinearLayout
-import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -108,7 +105,7 @@ class HomeFragment : Fragment() {
 
         view.fab_expense.setOnClickListener {
             fab_state=false //Making the fab to get to its original position before leaving the home fragment.
-            
+
             var navDirections =
                 HomeFragmentDirections.actionHomeFragmentToRecordsEntryFragmentExpense()
             view.findNavController().navigate(navDirections)
