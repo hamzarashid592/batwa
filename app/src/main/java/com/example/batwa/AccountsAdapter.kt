@@ -46,7 +46,23 @@ class AccountsAdapter(
 
         init {
             itemView.setOnClickListener {
-                Toast.makeText(context, "NumRecords ${accounts[pos].accountNumRecords} at pos $pos", Toast.LENGTH_SHORT).show()
+
+//                If the previous fragment is the income records entry fragment, go back to that fragment
+                if(itemView.findNavController().previousBackStackEntry!!.destination.id==R.id.recordsEntryFragmentIncome) {
+                    var navDirections =
+                        AccountsListFragmentDirections.actionAccountsListFragmentToRecordsEntryFragmentIncome(
+                            accounts[pos].accountID!!, accounts[pos].accountName
+                        )
+                    itemView.findNavController().navigate(navDirections)
+                }
+//                vice versa
+                else if(itemView.findNavController().previousBackStackEntry!!.destination.id==R.id.recordsEntryFragmentExpense){
+                    var navDirections =
+                        AccountsListFragmentDirections.actionAccountsListFragmentToRecordsEntryFragmentExpense(
+                            accounts[pos].accountID!!, accounts[pos].accountName
+                        )
+                    itemView.findNavController().navigate(navDirections)
+                }
             }
         }
     }
@@ -99,15 +115,18 @@ class AccountsAdapter(
             Account.ACCOUNT_CARD -> {
                 (holder as AccountCardViewHolder).itemView.text_view_account_name2.text = accounts[position].accountName
                 (holder as AccountCardViewHolder).itemView.text_view_account_balance2.text = "PKR ${accounts[position].accountBalance.toString()}"
+                (holder as AccountCardViewHolder).pos=position
             }
 
             Account.ACCOUNT_LIST->{
                 (holder as AccountListViewHolder).itemView.text_view_account_name3.text = accounts[position].accountName
+                (holder as AccountListViewHolder).pos=position
             }
 
             Account.ACCOUNT_SETTINGS->{
                 (holder as AccountSettingsViewHolder).itemView.text_view_account_name1.text = accounts[position].accountName
                 (holder as AccountSettingsViewHolder).itemView.text_view_account_balance1.text = "PKR ${accounts[position].accountBalance.toString()}"
+                (holder as AccountSettingsViewHolder).pos=position
             }
         }
 

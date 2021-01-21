@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_records_entry_income.view.*
 
 
@@ -15,6 +16,8 @@ class RecordsEntryFragmentIncome : Fragment() {
     val dbHelper by lazy { DBHelper(context, null) };
     var accounts = ArrayList<String>()
 
+//    The selected account from other fragments.
+    val args : RecordsEntryFragmentIncomeArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +32,29 @@ class RecordsEntryFragmentIncome : Fragment() {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_records_entry_income, container, false)
 
+
+//        -------------------------------------------------------THE OTHER BLOCK-------------------------------------------------------
+
+//        If we get a select account from any fragment
+        if (args.selectedAccountName!=null)
+            view.account_selection_record_entry.text=args.selectedAccountName
+
+
+
+
+//        Getting the account list.
+        view.account_selection_record_entry.setOnClickListener {
+
+            val navDirections=RecordsEntryFragmentIncomeDirections.actionRecordsEntryFragmentIncomeToAccountsListFragment()
+            view.findNavController().navigate(navDirections)
+        }
+
+
+
+
+//        -------------------------------------------------------THE CALCULATOR BLOCK-------------------------------------------------------
         var operands = ArrayList<Int>()
         var operators = ArrayList<Char>()
-
 
 //        The on click listeners for the individual keys
         view.button_0.setOnClickListener {
@@ -248,6 +271,7 @@ class RecordsEntryFragmentIncome : Fragment() {
             }
 
         }
+
 
 
 
