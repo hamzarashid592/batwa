@@ -215,6 +215,12 @@ class RecordsEntryFragmentIncome : Fragment() {
                 for (i in 0..userInput.length - 1) {
                     if (userInput[i] == '+' || userInput[i] == '-' || userInput[i] == '*' || userInput[i] == '/') {
 
+//                        This if is for the case when an operator comes before the first operand e.g. -10. This case will
+//                        ruin my algorithm. Therefore whenever we get an operator (minus) as the first character of the user input,
+//                        we skip that iteration.
+//                        if(i==0)
+//                            continue
+
                         operators = operators + userInput[i]
                         operandList.add(operand.toDouble())
                         operand = ""
