@@ -48,9 +48,9 @@ class AccountsAdapter(
             itemView.setOnClickListener {
 
 //                If the previous fragment is the income records entry fragment, go back to that fragment
-                if(itemView.findNavController().previousBackStackEntry!!.destination.id==R.id.recordsEntryFragmentIncome) {
+                if(itemView.findNavController().previousBackStackEntry!!.destination.id==R.id.viewPagerFragmentIncome) {
                     var navDirections =
-                        AccountsListFragmentDirections.actionAccountsListFragmentToRecordsEntryFragmentIncome(
+                        AccountsListFragmentDirections.actionAccountsListFragmentToViewPagerFragmentIncome(
                             accounts[pos].accountID!!, accounts[pos].accountName
                         )
                     itemView.findNavController().navigate(navDirections)

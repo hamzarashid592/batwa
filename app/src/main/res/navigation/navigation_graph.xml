@@ -26,8 +26,8 @@
             android:id="@+id/action_homeFragment_to_recordsEntryFragmentExpense"
             app:destination="@id/recordsEntryFragmentExpense" />
         <action
-            android:id="@+id/action_homeFragment_to_recordsEntryFragmentIncome"
-            app:destination="@id/recordsEntryFragmentIncome" />
+            android:id="@+id/action_homeFragment_to_viewPagerFragmentIncome"
+            app:destination="@id/viewPagerFragmentIncome" />
     </fragment>
     <fragment
         android:id="@+id/transactionsFragment"
@@ -79,40 +79,34 @@
             app:nullable="true"/>
     </fragment>
     <fragment
-        android:id="@+id/recordsEntryFragmentIncome"
-        android:name="com.example.batwa.RecordsEntryFragmentIncome"
-        android:label="Add your Income"
-        tools:layout="@layout/fragment_records_entry_income" >
-        <action
-            android:id="@+id/action_recordsEntryFragmentIncome_to_transactionAddEditFragment"
-            app:destination="@id/transactionAddEditFragment" />
-        <action
-            android:id="@+id/action_recordsEntryFragmentIncome_to_accountsListFragment"
-            app:destination="@id/accountsListFragment" />
-        <argument
-            android:name="selected_account_id"
-            app:argType="integer"
-            />
-        <argument
-            android:name="selected_account_name"
-            app:argType="string"
-            app:nullable="true"/>
-
-    </fragment>
-    <fragment
         android:id="@+id/accountsListFragment"
         android:name="com.example.batwa.AccountsListFragment"
         android:label="fragment_accounts_list"
         tools:layout="@layout/fragment_accounts_list" >
         <action
-            android:id="@+id/action_accountsListFragment_to_recordsEntryFragmentIncome"
-            app:destination="@id/recordsEntryFragmentIncome"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false"/>
-        <action
             android:id="@+id/action_accountsListFragment_to_recordsEntryFragmentExpense"
             app:destination="@id/recordsEntryFragmentExpense"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false"/>
+        <action
+            android:id="@+id/action_accountsListFragment_to_viewPagerFragmentIncome"
+            app:destination="@id/viewPagerFragmentIncome"
+            app:popUpTo="@id/homeFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/viewPagerFragmentIncome"
+        android:name="com.example.batwa.ViewPagerFragmentIncome"
+        android:label="fragment_view_pager_income"
+        tools:layout="@layout/fragment_view_pager_income" >
+        <action
+            android:id="@+id/action_viewPagerFragmentIncome_to_accountsListFragment"
+            app:destination="@id/accountsListFragment" />
+        <argument
+            android:name="selectedAccountID"
+            app:argType="integer" />
+        <argument
+            android:name="selectedAccountName"
+            app:argType="string"
+            app:nullable="true"/>
     </fragment>
 </navigation>

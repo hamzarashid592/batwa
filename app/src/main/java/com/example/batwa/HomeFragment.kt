@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
             fab_state=false //Making the fab to get to its original position before leaving the home fragment.
 
             var navDirections =
-                HomeFragmentDirections.actionHomeFragmentToRecordsEntryFragmentIncome(0,null)
+                HomeFragmentDirections.actionHomeFragmentToViewPagerFragmentIncome(0,null)
             view.findNavController().navigate(navDirections)
         }
 

@@ -11,13 +11,13 @@ import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_records_entry_income.view.*
 
 
-class RecordsEntryFragmentIncome : Fragment() {
+class RecordsEntryFragmentIncome(val argsFromFragmentAccountsList : ViewPagerFragmentIncomeArgs) : Fragment() {
 
     val dbHelper by lazy { DBHelper(context, null) };
     var accounts = ArrayList<String>()
 
 //    The selected account from other fragments.
-    val args : RecordsEntryFragmentIncomeArgs by navArgs()
+//    val args : ViewPagerFragmentIncomeArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +36,8 @@ class RecordsEntryFragmentIncome : Fragment() {
 //        -------------------------------------------------------THE OTHER BLOCK-------------------------------------------------------
 
 //        If we get a selected account from any fragment
-        if (args.selectedAccountName!=null)
-            view.account_selection_record_entry.text=args.selectedAccountName
+        if (argsFromFragmentAccountsList.selectedAccountName!=null)
+            view.account_selection_record_entry.text=argsFromFragmentAccountsList.selectedAccountName
 
 
 
@@ -45,7 +45,7 @@ class RecordsEntryFragmentIncome : Fragment() {
 //        Getting the account list. Going to the accounts list fragment for account selection.
         view.account_selection_record_entry.setOnClickListener {
 
-            val navDirections=RecordsEntryFragmentIncomeDirections.actionRecordsEntryFragmentIncomeToAccountsListFragment()
+            val navDirections=ViewPagerFragmentIncomeDirections.actionViewPagerFragmentIncomeToAccountsListFragment()
             view.findNavController().navigate(navDirections)
         }
 
