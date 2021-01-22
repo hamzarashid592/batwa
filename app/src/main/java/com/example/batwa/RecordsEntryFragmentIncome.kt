@@ -35,19 +35,21 @@ class RecordsEntryFragmentIncome : Fragment() {
 
 //        -------------------------------------------------------THE OTHER BLOCK-------------------------------------------------------
 
-//        If we get a select account from any fragment
+//        If we get a selected account from any fragment
         if (args.selectedAccountName!=null)
             view.account_selection_record_entry.text=args.selectedAccountName
 
 
 
 
-//        Getting the account list.
+//        Getting the account list. Going to the accounts list fragment for account selection.
         view.account_selection_record_entry.setOnClickListener {
 
             val navDirections=RecordsEntryFragmentIncomeDirections.actionRecordsEntryFragmentIncomeToAccountsListFragment()
             view.findNavController().navigate(navDirections)
         }
+
+
 
 
 
