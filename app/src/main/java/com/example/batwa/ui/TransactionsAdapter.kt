@@ -1,4 +1,4 @@
-package com.example.batwa
+package com.example.batwa.ui
 
 //import android.content.Context
 //import android.graphics.Color

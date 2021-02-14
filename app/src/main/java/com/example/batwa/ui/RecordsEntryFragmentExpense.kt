@@ -1,4 +1,4 @@
-package com.example.batwa
+package com.example.batwa.ui
 
 //import android.os.Bundle
 //import androidx.fragment.app.Fragment

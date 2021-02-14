@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Batwa">
-        <activity android:name="com.example.batwa.MainActivity">
+        <activity android:name="com.example.batwa.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

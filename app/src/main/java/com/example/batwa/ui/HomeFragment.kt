@@ -1,45 +1,40 @@
-package com.example.batwa
+package com.example.batwa.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import com.example.batwa.R
+import com.example.batwa.databinding.FragmentHomeBinding
 
 
 class HomeFragment : Fragment() {
 
 
-//    private var accountList = ArrayList<Account>()
+    //    private var accountList = ArrayList<Account>()
 //    private var accountMap = HashMap<Int, Account>()
 //    private var transactionList = ArrayList<Transaction>()
 //    private lateinit var dbHelper: DBHelper
 //
-//    //    Declaring animations and variables for the fab.
-//    val fab_rot_clockwise by lazy {
-//        AnimationUtils.loadAnimation(
-//            context,
-//            R.anim.fab_rotate_clockwise
-//        )
-//    }
-//    val fab_rot_anticlockwise by lazy {
-//        AnimationUtils.loadAnimation(
-//            context,
-//            R.anim.fab_rotate_anticlockwise
-//        )
-//    }
-//    val fab_go_up by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_bottom_up) }
-//    val fab_go_down by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_bottom_down) }
-//    var fab_state = false
+    //    Declaring animations and variables for the fab.
+    val fab_rot_clockwise by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.fab_rotate_clockwise
+        )
+    }
+    val fab_rot_anticlockwise by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.fab_rotate_anticlockwise
+        )
+    }
+    val fab_go_up by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_bottom_up) }
+    val fab_go_down by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_bottom_down) }
+    var fab_state = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +54,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val binding = FragmentHomeBinding.inflate(inflater, container, false)
 //
 //        //        Creating an onclick listener on the accounts cog wheel.
 //        view.icon_accounts_settings.setOnClickListener {
@@ -75,31 +70,37 @@ class HomeFragment : Fragment() {
 //        }
 //
 //
-////        Code for making the income and expense fabs to appear.
-//        view.fab_add.setOnClickListener {
-//            if (fab_state == false) {
-//                fab_state = true
-//                fab_add.startAnimation(fab_rot_clockwise)
-//
-//                fab_expense.visibility = View.VISIBLE
-//                fab_expense.isClickable = true
-//                fab_expense.startAnimation(fab_go_up)
-//                fab_income.visibility = View.VISIBLE
-//                fab_income.isClickable = true
-//                fab_income.startAnimation(fab_go_up)
-//            } else {
-//                fab_state = false
-//                fab_add.startAnimation(fab_rot_anticlockwise)
-//
-//                fab_expense.visibility = View.INVISIBLE
-//                fab_expense.isClickable = false
-//                fab_expense.startAnimation(fab_go_down)
-//                fab_income.visibility = View.INVISIBLE
-//                fab_income.isClickable = false
-//                fab_income.startAnimation(fab_go_down)
-//            }
-//
-//        }
+//        Code for making the income and expense fabs to appear.
+        binding.fabAdd.setOnClickListener {
+            if (fab_state == false) {
+                fab_state = true
+                binding.apply {
+                    fabAdd.startAnimation(fab_rot_clockwise)
+
+                    fabExpense.visibility = View.VISIBLE
+                    fabExpense.isClickable = true
+                    fabExpense.startAnimation(fab_go_up)
+                    fabExpense.visibility = View.VISIBLE
+                    fabExpense.isClickable = true
+                    fabExpense.startAnimation(fab_go_up)
+                }
+
+            } else {
+                fab_state = false
+                binding.apply {
+                    fabAdd.startAnimation(fab_rot_anticlockwise)
+
+                    fabExpense.visibility = View.INVISIBLE
+                    fabExpense.isClickable = false
+                    fabExpense.startAnimation(fab_go_down)
+                    fabIncome.visibility = View.INVISIBLE
+                    fabIncome.isClickable = false
+                    fabIncome.startAnimation(fab_go_down)
+                }
+
+            }
+
+        }
 //
 //        view.fab_expense.setOnClickListener {
 //            fab_state=false //Making the fab to get to its original position before leaving the home fragment.

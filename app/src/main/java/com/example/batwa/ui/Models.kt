@@ -1,4 +1,4 @@
-package com.example.batwa
+package com.example.batwa.ui
 
 //class Account(
 //    var accountBalance: Double = 0.0,
