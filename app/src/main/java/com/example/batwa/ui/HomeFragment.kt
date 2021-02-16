@@ -17,7 +17,6 @@ class HomeFragment : Fragment() {
     //    private var accountList = ArrayList<Account>()
 //    private var accountMap = HashMap<Int, Account>()
 //    private var transactionList = ArrayList<Transaction>()
-//    private lateinit var dbHelper: DBHelper
 //
     //    Declaring animations and variables for the fab.
     val fab_rot_clockwise by lazy {
@@ -53,7 +52,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        // Doing view binding for the fragment
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 //
 //        //        Creating an onclick listener on the accounts cog wheel.
@@ -70,7 +69,7 @@ class HomeFragment : Fragment() {
 //        }
 //
 //
-//        Code for making the income and expense fabs to appear.
+//        Code for making the income and expense fabs to appear and disappear.
         binding.fabAdd.setOnClickListener {
             if (fab_state == false) {
                 fab_state = true
@@ -80,9 +79,9 @@ class HomeFragment : Fragment() {
                     fabExpense.visibility = View.VISIBLE
                     fabExpense.isClickable = true
                     fabExpense.startAnimation(fab_go_up)
-                    fabExpense.visibility = View.VISIBLE
-                    fabExpense.isClickable = true
-                    fabExpense.startAnimation(fab_go_up)
+                    fabIncome.visibility = View.VISIBLE
+                    fabIncome.isClickable = true
+                    fabIncome.startAnimation(fab_go_up)
                 }
 
             } else {
@@ -119,7 +118,7 @@ class HomeFragment : Fragment() {
 //        }
 
 
-        return view
+        return binding.root
     }
 
 

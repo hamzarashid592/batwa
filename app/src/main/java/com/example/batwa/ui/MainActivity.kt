@@ -10,16 +10,20 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.batwa.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.batwa.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController : NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding=ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
 //        Log.d("hamza",supportFragmentManager.findFragmentById(R.id.fragment_container_view).toString())
 
@@ -30,16 +34,17 @@ class MainActivity : AppCompatActivity() {
         navController=navHost.findNavController()
 
 //        Initializing the app bar configuration.
-        appBarConfiguration= AppBarConfiguration(setOf(R.id.homeFragment), drawer_layout)
+        appBarConfiguration= AppBarConfiguration(setOf(R.id.homeFragment), binding.drawerLayout)
 
 //        Setting the default action bar
-        setSupportActionBar(toolbar_main)
+        setSupportActionBar(binding.toolbarMain)
 
 //        Integrating nav controller with the action bar
         setupActionBarWithNavController(navController,appBarConfiguration)
 
 //        Integrating nav drawer with the nav controller
-        nav_drawer.setupWithNavController(navController)
+
+        binding.navDrawer.setupWithNavController(navController)
 
 
     }
