@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import com.example.batwa.R
 import com.example.batwa.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
 
