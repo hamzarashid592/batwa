@@ -2,10 +2,26 @@ package com.example.batwa.ui
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import com.example.batwa.database.Account
 import com.example.batwa.database.BatwaDAO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-class BatwaViewModel @ViewModelInject constructor(batwaDAO: BatwaDAO) : ViewModel() {
+class BatwaViewModel @ViewModelInject constructor(
+    private val batwaDAO: BatwaDAO,
+    private val scope : CoroutineScope
+) : ViewModel() {
+
+//    Live data to be broadcasted.
+    var allAccounts = batwaDAO.getAllAccounts().asLiveData()
 
 
+    fun insertAccount(account: Account){
+        scope.launch {
+            batwaDAO.insertAccount(account)
+        }
+
+    }
 
 }

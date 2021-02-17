@@ -1,6 +1,7 @@
 package com.example.batwa.database
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Account")
@@ -13,7 +14,7 @@ data class Account(
 
 @Entity
 data class Transaction(
-    @PrimaryKey(autoGenerate = true) val TransactionID: Int? = 0,
+    @PrimaryKey(autoGenerate = true) val transactionID: Int? = 0,
     val transactionAmount: Double = 0.0,
     val transactionDate: String = "",
     val transactionComments: String = ""
