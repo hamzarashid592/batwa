@@ -16,6 +16,8 @@ class BatwaViewModel @ViewModelInject constructor(
 //    Live data to be broadcasted.
     var allAccounts = batwaDAO.getAllAccounts().asLiveData()
 
+    var testAccounts=batwaDAO.getAccountTransactions().asLiveData()
+
 
     fun insertAccount(account: Account){
         scope.launch {

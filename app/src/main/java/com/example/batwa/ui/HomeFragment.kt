@@ -103,6 +103,7 @@ class HomeFragment : Fragment() {
 
 //        Displaying the accounts in the accounts recycler view (card)
         batwaViewModel.allAccounts.observe(viewLifecycleOwner){
+
 //            Submitting the data to the adapter
             adapter.submitList(it)
 
@@ -110,6 +111,12 @@ class HomeFragment : Fragment() {
 //                Configuring the recycler view
                 accountsRecyclerView.layoutManager=GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
                 accountsRecyclerView.adapter=adapter
+            }
+        }
+
+        batwaViewModel.testAccounts.observe(viewLifecycleOwner){
+            it.forEach {
+//                it.accountTransactions.
             }
         }
 

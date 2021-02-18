@@ -30,7 +30,8 @@ public class BatwaCallback @Inject constructor(
                dao.insertAccount(Account(null,"Transport",0.0,0))
                dao.insertAccount(Account(null,"Test Account 2",0.0,0))
 
-               dao.insertTransaction(Transaction(null,10.2,))
+               dao.insertTransaction(Transaction(null,10.2,"24/09/2021",
+               "Test transaction",1))
           }
 
 

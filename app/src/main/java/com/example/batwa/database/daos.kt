@@ -29,4 +29,8 @@ interface BatwaDAO{
 
     @Query("Select * from `Account`")
     fun getAllAccounts() : Flow<List<Account>>
+
+    @androidx.room.Transaction
+    @Query("Select * from `Account`")
+    fun getAccountTransactions() : Flow<List<AccountTransactionRelation>>
 }
