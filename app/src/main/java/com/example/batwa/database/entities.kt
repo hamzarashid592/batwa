@@ -16,8 +16,15 @@ data class Transaction(
     val transactionAmount: Double = 0.0,
     val transactionDate: String = "",
     val transactionComments: String = "",
-    val accountID: Int? = 0
-)
+    val accountID: Int? = 0,
+    val transactionType : String=""
+){
+//    Static members
+    companion object{
+        var INCOME="Income"
+        var EXPENSE="Expense"
+    }
+}
 
 data class AccountTransactionRelation(
     @Embedded val account : Account,

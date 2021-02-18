@@ -23,11 +23,18 @@ public class BatwaCallback @Inject constructor(
      override fun onCreate(db: SupportSQLiteDatabase) {
           super.onCreate(db)
 
+//          Creating trigger for the DB
+          db.execSQL("create trigger alter_balance after insert on Transaction " +
+                  "begin " +
+                  "update Account set accountBalance=case when new.transactionType=\"Expense\" then accountBalance-new.transactionAmount " +
+                  "else accountBalance+new.transactionAmount end, accountNumRecords=accountNumRecords+1 where accountID=new.accountID; " +
+                  "end")
+
           val dao : BatwaDAO=myDB.get().getDAO()
 
           scope.launch {
 
-               dao.insertAccount(Account(null,"Transport",0.0,0))
+               dao.insertAccount(Account(null,"Transport",200.0,0))
                dao.insertAccount(Account(null,"Test Account 2",0.0,0))
 
                dao.insertTransaction(Transaction(null,10.2,"24/09/2021",

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.batwa.database.Account
 import com.example.batwa.database.BatwaDAO
+import com.example.batwa.database.Transaction
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -23,7 +24,12 @@ class BatwaViewModel @ViewModelInject constructor(
         scope.launch {
             batwaDAO.insertAccount(account)
         }
+    }
 
+    fun inserTransaction(transaction: Transaction){
+        scope.launch {
+            batwaDAO.insertTransaction(transaction)
+        }
     }
 
 }

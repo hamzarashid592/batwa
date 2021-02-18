@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.batwa.R
 import com.example.batwa.database.Account
+import com.example.batwa.database.Transaction
 import com.example.batwa.databinding.FragmentHomeBinding
 import com.example.batwa.ui.adapter.AccountAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -97,8 +98,16 @@ class HomeFragment : Fragment() {
 
 
         binding.fabIncome.setOnClickListener {
-            batwaViewModel.insertAccount(Account(null,"Test Account 3",24.5,10))
+//            batwaViewModel.insertAccount(Account(null,"Test Account 3",24.5,10))
+            batwaViewModel.inserTransaction(Transaction(null,10.0,"24/02/2021",
+            "Test transaction",1,Transaction.INCOME))
         }
+
+        binding.fabExpense.setOnClickListener {
+//            batwaViewModel.insertAccount(Account(null,"Test Account 3",24.5,10))
+        batwaViewModel.inserTransaction(Transaction(null,10.0,"24/02/2021",
+            "Test transaction",1,Transaction.EXPENSE))
+    }
 
 
 //        Displaying the accounts in the accounts recycler view (card)
@@ -114,11 +123,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        batwaViewModel.testAccounts.observe(viewLifecycleOwner){
-            it.forEach {
-//                it.accountTransactions.
-            }
-        }
+
 
         return binding.root
     }
