@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.batwa.database.Account
 import com.example.batwa.database.BatwaDAO
-import com.example.batwa.database.Transaction
+import com.example.batwa.database.WalletTransaction
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -16,8 +16,7 @@ class BatwaViewModel @ViewModelInject constructor(
 
 //    Live data to be broadcasted.
     var allAccounts = batwaDAO.getAllAccounts().asLiveData()
-
-    var testAccounts=batwaDAO.getAccountTransactions().asLiveData()
+    var allTransactions=batwaDAO.getAllTransactions().asLiveData()
 
 
     fun insertAccount(account: Account){
@@ -26,7 +25,7 @@ class BatwaViewModel @ViewModelInject constructor(
         }
     }
 
-    fun inserTransaction(transaction: Transaction){
+    fun insertTransaction(transaction: WalletTransaction){
         scope.launch {
             batwaDAO.insertTransaction(transaction)
         }

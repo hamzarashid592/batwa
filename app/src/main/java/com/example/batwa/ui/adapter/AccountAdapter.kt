@@ -9,7 +9,7 @@ import com.example.batwa.databinding.LoAccountCardBinding
 
 
 
-class AccountAdapter : ListAdapter<com.example.batwa.database.Account,AccountAdapter.AccountCardViewHolder>(util()) {
+class AccountAdapter : ListAdapter<com.example.batwa.database.Account,AccountAdapter.AccountCardViewHolder>(accountUtil()) {
 
     inner class AccountCardViewHolder(val binding: LoAccountCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -31,7 +31,7 @@ class AccountAdapter : ListAdapter<com.example.batwa.database.Account,AccountAda
     }
 }
 
-class util() : DiffUtil.ItemCallback<com.example.batwa.database.Account>(){
+class accountUtil() : DiffUtil.ItemCallback<com.example.batwa.database.Account>(){
     override fun areItemsTheSame(
         oldItem: com.example.batwa.database.Account,
         newItem: com.example.batwa.database.Account

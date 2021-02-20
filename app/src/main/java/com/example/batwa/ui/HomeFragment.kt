@@ -10,11 +10,13 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.batwa.R
 import com.example.batwa.database.Account
-import com.example.batwa.database.Transaction
+import com.example.batwa.database.WalletTransaction
 import com.example.batwa.databinding.FragmentHomeBinding
 import com.example.batwa.ui.adapter.AccountAdapter
+import com.example.batwa.ui.adapter.WalletTransactionAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,9 +37,11 @@ class HomeFragment : Fragment() {
         )
     }
     val fab_go_up by lazy {
-        AnimationUtils.loadAnimation(context, R.anim.fab_bottom_up) }
+        AnimationUtils.loadAnimation(context, R.anim.fab_bottom_up)
+    }
     val fab_go_down by lazy {
-        AnimationUtils.loadAnimation(context, R.anim.fab_bottom_down) }
+        AnimationUtils.loadAnimation(context, R.anim.fab_bottom_down)
+    }
     var fab_state = false
 
     private val batwaViewModel: BatwaViewModel by viewModels()
@@ -48,7 +52,7 @@ class HomeFragment : Fragment() {
     }
 
 
-//    Doing the following stuff here.
+    //    Doing the following stuff here.
 //    Making the main fab to rotate and appearance of the income and expense fabs.
 //    On click listeners for all the views necessary.
 //    Navigation to other fragments.
@@ -59,8 +63,9 @@ class HomeFragment : Fragment() {
         // Doing view binding for the fragment
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-//        Instantiating the account list adapter.
-        val adapter = AccountAdapter()
+//        Instantiating the adapters.
+        val accountAdapter = AccountAdapter()
+        val walletTransactionAdapter = WalletTransactionAdapter()
 
 
 //        Code for making the income and expense fabs to appear and disappear.
@@ -99,31 +104,54 @@ class HomeFragment : Fragment() {
 
         binding.fabIncome.setOnClickListener {
 //            batwaViewModel.insertAccount(Account(null,"Test Account 3",24.5,10))
-            batwaViewModel.inserTransaction(Transaction(null,10.0,"24/02/2021",
-            "Test transaction",1,Transaction.INCOME))
+            batwaViewModel.insertTransaction(
+                WalletTransaction(
+                    null, 10.0, "24/02/2021",
+                    "Test transaction", 1, WalletTransaction.INCOME
+                )
+            )
+            Log.d("hamza","Inserted ${WalletTransaction.INCOME}")
         }
 
         binding.fabExpense.setOnClickListener {
 //            batwaViewModel.insertAccount(Account(null,"Test Account 3",24.5,10))
-        batwaViewModel.inserTransaction(Transaction(null,10.0,"24/02/2021",
-            "Test transaction",1,Transaction.EXPENSE))
-    }
-
-
-//        Displaying the accounts in the accounts recycler view (card)
-        batwaViewModel.allAccounts.observe(viewLifecycleOwner){
-
-//            Submitting the data to the adapter
-            adapter.submitList(it)
-
-            binding.apply {
-//                Configuring the recycler view
-                accountsRecyclerView.layoutManager=GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
-                accountsRecyclerView.adapter=adapter
-            }
+            batwaViewModel.insertTransaction(
+                WalletTransaction(
+                    null, 10.0, "24/02/2021",
+                    "Test transaction", 1, WalletTransaction.EXPENSE
+                )
+            )
+            Log.d("hamza","Inserted ${WalletTransaction.EXPENSE}")
         }
 
 
+//        Displaying the accounts in the accounts recycler view (card)
+        batwaViewModel.allAccounts.observe(viewLifecycleOwner) {
+
+//            Submitting the data to the adapter
+            accountAdapter.submitList(it)
+
+            binding.apply {
+//                Configuring the recycler view
+                accountsRecyclerView.layoutManager =
+                    GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
+                accountsRecyclerView.adapter = accountAdapter
+            }
+        }
+
+//    Displaying the transactions on the main screen.
+        batwaViewModel.allTransactions.observe(viewLifecycleOwner){
+
+//            Submitting the transactions to the transaction adapter.
+            walletTransactionAdapter.submitList(it)
+
+            binding.apply {
+//                Configuring the recycler view
+                mainScreenTransactionsRecyclerView.layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,
+                    false)
+                mainScreenTransactionsRecyclerView.adapter=walletTransactionAdapter
+            }
+        }
 
         return binding.root
     }

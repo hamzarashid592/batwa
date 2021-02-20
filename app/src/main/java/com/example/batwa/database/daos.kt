@@ -10,27 +10,26 @@ interface BatwaDAO{
     suspend fun insertAccount(account: Account)
 
     @Insert
-    suspend fun insertTransaction(transaction: Transaction)
+    suspend fun insertTransaction(transaction: WalletTransaction)
 
     @Delete
-    suspend fun deleteTransaction(transaction: Transaction)
+    suspend fun deleteTransaction(transaction: WalletTransaction)
 
     @Delete
     suspend fun deleteAccount(account: Account)
 
     @Update
-    suspend fun updateTransaction(transaction: Transaction)
+    suspend fun updateTransaction(transaction: WalletTransaction)
 
     @Update
     suspend fun updateAccount(account: Account)
 
-    @Query("Select * from `Transaction`")
-    fun getAllTransactions() : Flow<List<Transaction>>
-
     @Query("Select * from `Account`")
     fun getAllAccounts() : Flow<List<Account>>
 
-    @androidx.room.Transaction
-    @Query("Select * from `Account`")
-    fun getAccountTransactions() : Flow<List<AccountTransactionRelation>>
+//    @Query("Select * from `WalletTransaction`")
+//    fun getAllTransactions() : Flow<List<WalletTransaction>>
+
+    @Query("Select * from AccountTransactionView order by transactionID desc")
+    fun getAllTransactions():Flow<List<AccountTransactionView>>
 }
