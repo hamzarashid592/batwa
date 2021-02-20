@@ -8,11 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.batwa.R
-import com.example.batwa.database.Account
 import com.example.batwa.database.WalletTransaction
 import com.example.batwa.databinding.FragmentHomeBinding
 import com.example.batwa.ui.adapter.AccountAdapter
@@ -44,7 +45,8 @@ class HomeFragment : Fragment() {
     }
     var fab_state = false
 
-    private val batwaViewModel: BatwaViewModel by viewModels()
+//    Creating the view model.
+    private val batwaViewModel: BatwaViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +69,7 @@ class HomeFragment : Fragment() {
         val accountAdapter = AccountAdapter()
         val walletTransactionAdapter = WalletTransactionAdapter()
 
+//--------------------------------------------UI Animations--------------------------------------------
 
 //        Code for making the income and expense fabs to appear and disappear.
         binding.fabAdd.setOnClickListener {
@@ -101,7 +104,14 @@ class HomeFragment : Fragment() {
         }
 
 
+//--------------------------------------------Navigation Actions--------------------------------------------
+        binding.buttonAddAccount.setOnClickListener {
+            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAccountAddEditFragment())
+        }
 
+
+
+//--------------------------------------------Button click listeners--------------------------------------------
         binding.fabIncome.setOnClickListener {
 //            batwaViewModel.insertAccount(Account(null,"Test Account 3",24.5,10))
             batwaViewModel.insertTransaction(
@@ -110,7 +120,7 @@ class HomeFragment : Fragment() {
                     "Test transaction", 1, WalletTransaction.INCOME
                 )
             )
-            Log.d("hamza","Inserted ${WalletTransaction.INCOME}")
+            Log.d("hamza", "Inserted ${WalletTransaction.INCOME}")
         }
 
         binding.fabExpense.setOnClickListener {
@@ -121,10 +131,11 @@ class HomeFragment : Fragment() {
                     "Test transaction", 1, WalletTransaction.EXPENSE
                 )
             )
-            Log.d("hamza","Inserted ${WalletTransaction.EXPENSE}")
+            Log.d("hamza", "Inserted ${WalletTransaction.EXPENSE}")
         }
 
 
+//--------------------------------------------Live Data Listeners--------------------------------------------
 //        Displaying the accounts in the accounts recycler view (card)
         batwaViewModel.allAccounts.observe(viewLifecycleOwner) {
 
@@ -140,18 +151,21 @@ class HomeFragment : Fragment() {
         }
 
 //    Displaying the transactions on the main screen.
-        batwaViewModel.allTransactions.observe(viewLifecycleOwner){
+        batwaViewModel.allTransactions.observe(viewLifecycleOwner) {
 
 //            Submitting the transactions to the transaction adapter.
             walletTransactionAdapter.submitList(it)
 
             binding.apply {
 //                Configuring the recycler view
-                mainScreenTransactionsRecyclerView.layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,
-                    false)
-                mainScreenTransactionsRecyclerView.adapter=walletTransactionAdapter
+                mainScreenTransactionsRecyclerView.layoutManager = LinearLayoutManager(
+                    context, LinearLayoutManager.VERTICAL,
+                    false
+                )
+                mainScreenTransactionsRecyclerView.adapter = walletTransactionAdapter
             }
         }
+
 
         return binding.root
     }
