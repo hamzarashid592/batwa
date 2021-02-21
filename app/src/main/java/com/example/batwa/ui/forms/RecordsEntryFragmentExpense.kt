@@ -5,12 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.batwa.databinding.FragmentRecordsEntryExpenseBinding
+import com.example.batwa.ui.BatwaViewModel
 
 
 class RecordsEntryFragmentExpense : Fragment() {
 
+    //    Creating the view model.
+    private val batwaViewModel: BatwaViewModel by activityViewModels()
 
 //    val args : RecordsEntryFragmentExpenseArgs by navArgs()
 
@@ -29,6 +34,9 @@ class RecordsEntryFragmentExpense : Fragment() {
 
 
 //        -------------------------------------------------------THE OTHER BLOCK-------------------------------------------------------
+
+//        Creating an adapter for the spinner.
+//        var spinnerAdapter =ArrayAdapter()
 
 ////        If we get a select account from any fragment
 //        if (args.selectedAccountName!=null)
@@ -108,16 +116,16 @@ class RecordsEntryFragmentExpense : Fragment() {
 
 //            Bool variable to keep track of whether user has already entered a decimal
 //            before or not
-            var decimalEntered : Boolean =false
+            var decimalEntered: Boolean = false
 
 //            Iterating the entire user input to find whether decimal exists or not
             userInput.forEach {
-                if(it=='.')
-                    decimalEntered=true
+                if (it == '.')
+                    decimalEntered = true
             }
 
 //            Allow decimal to be entered only if the user has not entered it before.
-            if (decimalEntered==false) {
+            if (decimalEntered == false) {
                 binding.textViewAccountBalanceEntry.text =
                     binding.textViewAccountBalanceEntry.text.toString() + '.'
             }
@@ -232,48 +240,13 @@ class RecordsEntryFragmentExpense : Fragment() {
                 && userInput[userInput.length - 1] != '*'
             ) {
 
-//            List to store all the operands given by the user
-                var operandList = ArrayList<Double>()
-//            To store the operators
-                var operators: String = ""
+            //Calling the view model function to parse the user input and generate the result.
+                var resultBalance = batwaViewModel.generateResultBalance(userInput)
 
-
-//            Following parses the operands and operators in different entities.
-
-//            To store a single operand.
-                var operand = ""
-                for (i in 0..userInput.length - 1) {
-                    if (userInput[i] == '+' || userInput[i] == '-' || userInput[i] == '*' || userInput[i] == '/') {
-
-                        operators = operators + userInput[i]
-                        operandList.add(operand.toDouble())
-                        operand = ""
-                        continue
-                    }
-                    operand = operand + userInput[i] //Getting the operand character by character
-                }
-                operandList.add(operand.toDouble()) //Getting the last operand
-
-//            Following applies the operations to the operands and generates the final result.
-
-                var answer: Double = operandList[0] //To store the final result
-                for (i in 0..operators.length - 1) {
-
-                    when (operators[i]) {
-                        '+' -> answer += operandList[i + 1]
-                        '-' -> answer -= operandList[i + 1]
-                        '*' -> answer *= operandList[i + 1]
-                        '/' -> answer /= operandList[i + 1]
-                    }
-                }
-
-//            Displaying the result.
-                binding.textViewAccountBalanceEntry.text = answer.toString()
+            //Displaying the result.
+                binding.textViewAccountBalanceEntry.text = resultBalance.toString()
             }
-
-
         }
-
 
 
         return binding.root

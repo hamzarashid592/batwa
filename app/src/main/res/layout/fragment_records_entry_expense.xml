@@ -63,6 +63,11 @@
                 android:singleLine="true"
                 android:maxLines="1"
                 tools:ignore="EllipsizeMaxLines"></TextView>
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_account_selection_record_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ></androidx.appcompat.widget.AppCompatSpinner>
 
         </LinearLayout>
 
