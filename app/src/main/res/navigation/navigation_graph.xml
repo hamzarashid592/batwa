@@ -13,10 +13,17 @@
             android:id="@+id/action_homeFragment_to_accountAddEditFragment"
             app:destination="@id/accountAddEditFragment"
             />
+        <action
+            android:id="@+id/action_homeFragment_to_recordsEntryFragmentExpense"
+            app:destination="@id/recordsEntryFragmentExpense" />
     </fragment>
     <fragment
         android:id="@+id/accountAddEditFragment"
         android:name="com.example.batwa.ui.forms.AccountAddEditFragment"
         android:label="Add/Edit Account"
         tools:layout="@layout/fragment_account_add_edit" />
+    <fragment
+        android:id="@+id/recordsEntryFragmentExpense"
+        android:name="com.example.batwa.ui.forms.RecordsEntryFragmentExpense"
+        android:label="Enter your Expense" />
 </navigation>

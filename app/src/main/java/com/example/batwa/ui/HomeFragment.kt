@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.batwa.R
@@ -45,7 +46,7 @@ class HomeFragment : Fragment() {
     }
     var fab_state = false
 
-//    Creating the view model.
+    //    Creating the view model.
     private val batwaViewModel: BatwaViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,64 +76,34 @@ class HomeFragment : Fragment() {
         binding.fabAdd.setOnClickListener {
             if (fab_state == false) {
                 fab_state = true
-                binding.apply {
-                    fabAdd.startAnimation(fab_rot_clockwise)
-
-                    fabExpense.visibility = View.VISIBLE
-                    fabExpense.isClickable = true
-                    fabExpense.startAnimation(fab_go_up)
-                    fabIncome.visibility = View.VISIBLE
-                    fabIncome.isClickable = true
-                    fabIncome.startAnimation(fab_go_up)
-                }
-
+                showRecordEntryFabs(binding)
             } else {
                 fab_state = false
-                binding.apply {
-                    fabAdd.startAnimation(fab_rot_anticlockwise)
-
-                    fabExpense.visibility = View.INVISIBLE
-                    fabExpense.isClickable = false
-                    fabExpense.startAnimation(fab_go_down)
-                    fabIncome.visibility = View.INVISIBLE
-                    fabIncome.isClickable = false
-                    fabIncome.startAnimation(fab_go_down)
-                }
-
+                hideRecordEntryFabs(binding)
             }
-
         }
 
 
 //--------------------------------------------Navigation Actions--------------------------------------------
         binding.buttonAddAccount.setOnClickListener {
-            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAccountAddEditFragment())
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToAccountAddEditFragment())
         }
 
-
-
-//--------------------------------------------Button click listeners--------------------------------------------
-        binding.fabIncome.setOnClickListener {
-//            batwaViewModel.insertAccount(Account(null,"Test Account 3",24.5,10))
-            batwaViewModel.insertTransaction(
-                WalletTransaction(
-                    null, 10.0, "24/02/2021",
-                    "Test transaction", 1, WalletTransaction.INCOME
-                )
-            )
-            Log.d("hamza", "Inserted ${WalletTransaction.INCOME}")
-        }
-
+//        Addition of Expense
         binding.fabExpense.setOnClickListener {
-//            batwaViewModel.insertAccount(Account(null,"Test Account 3",24.5,10))
-            batwaViewModel.insertTransaction(
-                WalletTransaction(
-                    null, 10.0, "24/02/2021",
-                    "Test transaction", 1, WalletTransaction.EXPENSE
-                )
-            )
-            Log.d("hamza", "Inserted ${WalletTransaction.EXPENSE}")
+        // Returning the fab to the original state
+            if(fab_state==true){
+                fab_state=false
+                hideRecordEntryFabs(binding)
+            }
+        //Navigating to the fragment
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToRecordsEntryFragmentExpense())
         }
+
+
+//--------------------------------------------Button click listeners-------------------------------------------
 
 
 //--------------------------------------------Live Data Listeners--------------------------------------------
@@ -177,4 +148,34 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
     }
+
+
+    //--------------------------------------------UI Animation Functions--------------------------------------------
+    fun showRecordEntryFabs(binding: FragmentHomeBinding) {
+        binding.apply {
+            fabAdd.startAnimation(fab_rot_clockwise)
+
+            fabExpense.visibility = View.VISIBLE
+            fabExpense.isClickable = true
+            fabExpense.startAnimation(fab_go_up)
+            fabIncome.visibility = View.VISIBLE
+            fabIncome.isClickable = true
+            fabIncome.startAnimation(fab_go_up)
+        }
+    }
+    fun hideRecordEntryFabs(binding: FragmentHomeBinding){
+        binding.apply {
+            fabAdd.startAnimation(fab_rot_anticlockwise)
+
+            fabExpense.visibility = View.INVISIBLE
+            fabExpense.isClickable = false
+            fabExpense.startAnimation(fab_go_down)
+            fabIncome.visibility = View.INVISIBLE
+            fabIncome.isClickable = false
+            fabIncome.startAnimation(fab_go_down)
+        }
+    }
+
+
+
 }

@@ -11,21 +11,25 @@ import kotlinx.coroutines.launch
 
 class BatwaViewModel @ViewModelInject constructor(
     private val batwaDAO: BatwaDAO,
-    private val scope : CoroutineScope
+    private val scope: CoroutineScope
 ) : ViewModel() {
 
-//    Live data to be broadcasted.
+    //--------------------------------------------Live Data--------------------------------------------
     var allAccounts = batwaDAO.getAllAccounts().asLiveData()
-    var allTransactions=batwaDAO.getAllTransactions().asLiveData()
+    var allTransactions = batwaDAO.getAllTransactions().asLiveData()
 
 
-    fun insertAccount(account: Account){
+    //--------------------------------------------Mathematical Functions--------------------------------------------
+
+
+    //--------------------------------------------DB Operation Functions--------------------------------------------
+    fun insertAccount(account: Account) {
         scope.launch {
             batwaDAO.insertAccount(account)
         }
     }
 
-    fun insertTransaction(transaction: WalletTransaction){
+    fun insertTransaction(transaction: WalletTransaction) {
         scope.launch {
             batwaDAO.insertTransaction(transaction)
         }
