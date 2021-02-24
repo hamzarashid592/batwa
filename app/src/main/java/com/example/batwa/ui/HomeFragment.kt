@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 //        Instantiating the adapters.
-        val accountAdapter = AccountAdapter()
+        val accountAdapter = AccountAdapter(AccountAdapter.ACCOUNT_CARD)
         val walletTransactionAdapter = WalletTransactionAdapter()
 
 //--------------------------------------------UI Animations--------------------------------------------

@@ -16,6 +16,7 @@
         <action
             android:id="@+id/action_homeFragment_to_recordsEntryFragmentExpense"
             app:destination="@id/recordsEntryFragmentExpense" />
+
     </fragment>
     <fragment
         android:id="@+id/accountAddEditFragment"
