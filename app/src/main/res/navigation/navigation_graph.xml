@@ -26,5 +26,17 @@
     <fragment
         android:id="@+id/recordsEntryFragmentExpense"
         android:name="com.example.batwa.ui.forms.RecordsEntryFragmentExpense"
-        android:label="Enter your Expense" />
+        android:label="Enter your Expense" >
+        <action
+            android:id="@+id/action_recordsEntryFragmentExpense_to_accountsListFragment"
+            app:destination="@id/accountsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountsListFragment"
+        android:name="com.example.batwa.ui.AccountsListFragment"
+        android:label="AccountsListFragment" >
+        <action
+            android:id="@+id/action_accountsListFragment_to_recordsEntryFragmentExpense"
+            app:destination="@id/recordsEntryFragmentExpense" />
+    </fragment>
 </navigation>

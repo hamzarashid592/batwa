@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.batwa.databinding.FragmentRecordsEntryExpenseBinding
 import com.example.batwa.ui.BatwaViewModel
@@ -47,6 +48,10 @@ class RecordsEntryFragmentExpense : Fragment() {
 //            val navDirections=RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToAccountsListFragment()
 //            view.findNavController().navigate(navDirections)
 //        }
+//        Navigating to the account selection fragment
+        binding.accountSelectionRecordEntry.setOnClickListener {
+            findNavController().navigate(RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToAccountsListFragment())
+        }
 
 
 //        -------------------------------------------------------THE CALCULATOR BLOCK-------------------------------------------------------
