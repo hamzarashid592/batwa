@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.batwa.database.Account
 import com.example.batwa.databinding.LoAccountCardBinding
 import com.example.batwa.databinding.LoAccountListBinding
-import com.example.batwa.ui.AccountsListFragmentDirections
 import com.example.batwa.ui.BatwaViewModel
 
 
@@ -51,10 +50,7 @@ class AccountAdapter(
 //                Setting the selected account
                 viewModel.setSelectedAccount(selectedItem)
 //                Navigating back to the record entry fragment.
-                Navigation.findNavController(it)
-                    .navigate(
-                        AccountsListFragmentDirections.actionAccountsListFragmentToRecordsEntryFragmentExpense()
-                    )
+                Navigation.findNavController(it).popBackStack()
             }
         }
 

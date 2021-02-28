@@ -1,16 +1,20 @@
 package com.example.batwa.ui.forms
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import com.example.batwa.database.WalletTransaction
 import com.example.batwa.databinding.FragmentRecordsEntryExpenseBinding
 import com.example.batwa.ui.BatwaViewModel
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class RecordsEntryFragmentExpense : Fragment() {
@@ -25,6 +29,7 @@ class RecordsEntryFragmentExpense : Fragment() {
 
 
     //    Adding the calculator and record entry stuff here.
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,14 +47,45 @@ class RecordsEntryFragmentExpense : Fragment() {
         }
 
 //        Setting the value of the selected account got from the account selection fragment
-        if (batwaViewModel.getSelectedAccount()!=null)
-            binding.accountSelectionRecordEntry.text=batwaViewModel.getSelectedAccount()!!.accountName
+        if (batwaViewModel.getSelectedAccount() != null)
+            binding.accountSelectionRecordEntry.text =
+                batwaViewModel.getSelectedAccount()!!.accountName
+
+//        The submit button action.
+        binding.buttonSubmit.setOnClickListener {
+//            Getting the current date and time.
+            var currentDate=LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+            var currentTime=LocalDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm a"))
+
+//            If the user hasn't entered a anything
+            if (binding.textViewAccountBalanceEntry.text.toString().length == 0)
+                Toast.makeText(context, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
+
+//            If the user hasn't selected an account
+            else if (batwaViewModel.getSelectedAccount() == null)
+                Toast.makeText(context, "Please select an account", Toast.LENGTH_SHORT).show()
+
+
+//            If all works well.
+            else {
+                batwaViewModel.insertTransaction(
+                    WalletTransaction(
+                        null,
+                        binding.textViewAccountBalanceEntry.text.toString().toDouble(),
+                        currentDate,
+                        "Nope",
+                        batwaViewModel.getSelectedAccount()!!.accountID,
+                        WalletTransaction.EXPENSE
+                    )
+                )
+                Toast.makeText(context, "Transaction added successfully", Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            }
+
+        }
 
 
 //        -------------------------------------------------------THE CALCULATOR BLOCK-------------------------------------------------------
-
-        var operands = ArrayList<Int>()
-        var operators = ArrayList<Char>()
 
 //        The on click listeners for the individual keys
         binding.button0.setOnClickListener {
@@ -237,10 +273,10 @@ class RecordsEntryFragmentExpense : Fragment() {
                 && userInput[userInput.length - 1] != '*'
             ) {
 
-            //Calling the view model function to parse the user input and generate the result.
+                //Calling the view model function to parse the user input and generate the result.
                 var resultBalance = batwaViewModel.generateResultBalance(userInput)
 
-            //Displaying the result.
+                //Displaying the result.
                 binding.textViewAccountBalanceEntry.text = resultBalance.toString()
             }
         }
