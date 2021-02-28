@@ -1,17 +1,23 @@
 package com.example.batwa.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.batwa.database.Account
 import com.example.batwa.databinding.LoAccountCardBinding
 import com.example.batwa.databinding.LoAccountListBinding
+import com.example.batwa.ui.AccountsListFragmentDirections
+import com.example.batwa.ui.BatwaViewModel
 
 
 class AccountAdapter(
-    val accountAdapterType: String
+    val accountAdapterType: String,
+    val viewModel: BatwaViewModel  //The view model should be passed here.
 ) : ListAdapter<com.example.batwa.database.Account, RecyclerView.ViewHolder>(accountUtil()) {
 
     //    Static members representing the adapter type
@@ -20,8 +26,6 @@ class AccountAdapter(
         val ACCOUNT_LIST: String = "account_list"
     }
 
-    //    Private property to hold the current position.
-    private var pos: Int = 0
 
     //    Account card adapter type
     inner class AccountCardViewHolder(val binding: LoAccountCardBinding) :
@@ -37,6 +41,22 @@ class AccountAdapter(
     //    Account list adapter type
     inner class AccountListViewHolder(val binding: LoAccountListBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        //    Property to hold the current selected item.
+        var selectedItem = Account()
+
+        //        On click action for the list item.
+        init {
+            binding.root.setOnClickListener {
+//                Setting the selected account
+                viewModel.setSelectedAccount(selectedItem)
+//                Navigating back to the record entry fragment.
+                Navigation.findNavController(it)
+                    .navigate(
+                        AccountsListFragmentDirections.actionAccountsListFragmentToRecordsEntryFragmentExpense()
+                    )
+            }
+        }
 
 
         fun bindList(list_account: Account) {
@@ -76,13 +96,16 @@ class AccountAdapter(
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-//        Saving the position of the item being touched.
-        pos = position
+
 
         if (accountAdapterType == ACCOUNT_CARD)
             (holder as AccountCardViewHolder).bindCard(getItem(position))
-        else if (accountAdapterType == ACCOUNT_LIST)
-            (holder as AccountListViewHolder).bindList(getItem(position))
+        else if (accountAdapterType == ACCOUNT_LIST) {
+            val listHolder = (holder as AccountListViewHolder)
+//            Saving the selected item as the property of the account list class for later use.
+            listHolder.selectedItem=getItem(position)
+            listHolder.bindList(listHolder.selectedItem)
+        }
     }
 
 

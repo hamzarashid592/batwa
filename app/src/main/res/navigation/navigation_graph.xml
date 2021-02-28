@@ -30,6 +30,7 @@
         <action
             android:id="@+id/action_recordsEntryFragmentExpense_to_accountsListFragment"
             app:destination="@id/accountsListFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/accountsListFragment"
@@ -37,6 +38,10 @@
         android:label="AccountsListFragment" >
         <action
             android:id="@+id/action_accountsListFragment_to_recordsEntryFragmentExpense"
-            app:destination="@id/recordsEntryFragmentExpense" />
+            app:destination="@id/recordsEntryFragmentExpense"
+            app:popUpTo="@id/homeFragment">
+
+        </action>
+
     </fragment>
 </navigation>

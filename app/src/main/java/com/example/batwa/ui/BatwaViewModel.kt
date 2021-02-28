@@ -14,13 +14,16 @@ class BatwaViewModel @ViewModelInject constructor(
     private val scope: CoroutineScope
 ) : ViewModel() {
 
+    //--------------------------------------------Program Properties--------------------------------------------
+    private var selectedAccount : Account? =null
+
     //--------------------------------------------Live Data--------------------------------------------
     var allAccounts = batwaDAO.getAllAccounts().asLiveData()
     var allTransactions = batwaDAO.getAllTransactions().asLiveData()
 
 
     //--------------------------------------------Program Functions--------------------------------------------
-    fun generateResultBalance(userInput : String) : Double{
+    fun generateResultBalance(userInput: String): Double {
         //List to store all the operands given by the user
         var operandList = ArrayList<Double>()
         //To store the operators
@@ -58,6 +61,12 @@ class BatwaViewModel @ViewModelInject constructor(
         }
         return answer
     }
+
+    fun setSelectedAccount(account: Account) {
+        selectedAccount = account
+    }
+
+    fun getSelectedAccount(): Account? = selectedAccount
 
     //--------------------------------------------DB Operation Functions--------------------------------------------
     fun insertAccount(account: Account) {

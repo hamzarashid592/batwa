@@ -18,7 +18,6 @@ class RecordsEntryFragmentExpense : Fragment() {
     //    Creating the view model.
     private val batwaViewModel: BatwaViewModel by activityViewModels()
 
-//    val args : RecordsEntryFragmentExpenseArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,22 +35,15 @@ class RecordsEntryFragmentExpense : Fragment() {
 
 //        -------------------------------------------------------THE OTHER BLOCK-------------------------------------------------------
 
-//        Creating an adapter for the spinner.
-//        var spinnerAdapter =ArrayAdapter()
 
-////        If we get a select account from any fragment
-//        if (args.selectedAccountName!=null)
-//            view.account_selection_record_entry.text=args.selectedAccountName
-//
-////        Getting the account list.
-//        view.account_selection_record_entry.setOnClickListener {
-//            val navDirections=RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToAccountsListFragment()
-//            view.findNavController().navigate(navDirections)
-//        }
 //        Navigating to the account selection fragment
         binding.accountSelectionRecordEntry.setOnClickListener {
             findNavController().navigate(RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToAccountsListFragment())
         }
+
+//        Setting the value of the selected account got from the account selection fragment
+        if (batwaViewModel.getSelectedAccount()!=null)
+            binding.accountSelectionRecordEntry.text=batwaViewModel.getSelectedAccount()!!.accountName
 
 
 //        -------------------------------------------------------THE CALCULATOR BLOCK-------------------------------------------------------

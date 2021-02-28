@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 //        Instantiating the adapters.
-        val accountAdapter = AccountAdapter(AccountAdapter.ACCOUNT_CARD)
+        val accountAdapter = AccountAdapter(AccountAdapter.ACCOUNT_CARD,batwaViewModel)
         val walletTransactionAdapter = WalletTransactionAdapter()
 
 //--------------------------------------------UI Animations--------------------------------------------
@@ -92,12 +92,12 @@ class HomeFragment : Fragment() {
 
 //        Addition of Expense
         binding.fabExpense.setOnClickListener {
-        // Returning the fab to the original state
-            if(fab_state==true){
-                fab_state=false
+            // Returning the fab to the original state
+            if (fab_state == true) {
+                fab_state = false
                 hideRecordEntryFabs(binding)
             }
-        //Navigating to the fragment
+            //Navigating to the fragment
             it.findNavController()
                 .navigate(HomeFragmentDirections.actionHomeFragmentToRecordsEntryFragmentExpense())
         }
@@ -163,7 +163,8 @@ class HomeFragment : Fragment() {
             fabIncome.startAnimation(fab_go_up)
         }
     }
-    fun hideRecordEntryFabs(binding: FragmentHomeBinding){
+
+    fun hideRecordEntryFabs(binding: FragmentHomeBinding) {
         binding.apply {
             fabAdd.startAnimation(fab_rot_anticlockwise)
 
@@ -175,7 +176,6 @@ class HomeFragment : Fragment() {
             fabIncome.startAnimation(fab_go_down)
         }
     }
-
 
 
 }

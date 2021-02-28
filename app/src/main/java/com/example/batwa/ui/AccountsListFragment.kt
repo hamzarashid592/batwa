@@ -32,7 +32,7 @@ class AccountsListFragment : Fragment() {
         val binding = FragmentAccountsListBinding.inflate(inflater, container, false)
 
         //Instantiating the adapter.
-        val accountAdapter = AccountAdapter(AccountAdapter.ACCOUNT_LIST)
+        val accountAdapter = AccountAdapter(AccountAdapter.ACCOUNT_LIST,batwaViewModel)
 
 //        Displaying the accounts in the accounts recycler view (list)
         batwaViewModel.allAccounts.observe(viewLifecycleOwner) {
