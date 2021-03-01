@@ -39,32 +39,75 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_height="wrap_content">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="Account"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:textColor="@color/gray_numbers"></TextView>
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingRight="15dp">
 
-            <TextView
-                android:id="@+id/account_selection_record_entry"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="Account"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/gray_numbers"
+                    android:gravity="center"></TextView>
+
+                <TextView
+                    android:id="@+id/account_selection_record_entry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select account"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/white"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    tools:ignore="EllipsizeMaxLines"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select account"
-                android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/white"
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:maxLines="1"
-                tools:ignore="EllipsizeMaxLines"></TextView>
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="Details"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/gray_numbers"
+                    android:gravity="center"></TextView>
+
+                <TextView
+                    android:id="@+id/text_view_add_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tap to Add"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/white"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    tools:ignore="EllipsizeMaxLines"></TextView>
+
+            </LinearLayout>
 
         </LinearLayout>
+
+
+
+
 
 
     </LinearLayout>

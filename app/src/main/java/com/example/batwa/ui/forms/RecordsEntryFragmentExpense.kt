@@ -46,6 +46,11 @@ class RecordsEntryFragmentExpense : Fragment() {
             findNavController().navigate(RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToAccountsListFragment())
         }
 
+//        Navigating to the notes entry fragment
+        binding.textViewAddDetails.setOnClickListener {
+
+        }
+
 //        Setting the value of the selected account got from the account selection fragment
         if (batwaViewModel.getSelectedAccount() != null)
             binding.accountSelectionRecordEntry.text =

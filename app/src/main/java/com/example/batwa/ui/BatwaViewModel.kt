@@ -16,6 +16,7 @@ class BatwaViewModel @ViewModelInject constructor(
 
     //--------------------------------------------Program Properties--------------------------------------------
     private var selectedAccount : Account? =null
+    private var currentTransaction : WalletTransaction?=null
 
     //--------------------------------------------Live Data--------------------------------------------
     var allAccounts = batwaDAO.getAllAccounts().asLiveData()
@@ -67,6 +68,11 @@ class BatwaViewModel @ViewModelInject constructor(
     }
 
     fun getSelectedAccount(): Account? = selectedAccount
+
+    fun setCurrentTransaction(walletTransaction: WalletTransaction){
+        currentTransaction=walletTransaction
+    }
+    fun getCurrentTransaction() : WalletTransaction? = currentTransaction
 
     //--------------------------------------------DB Operation Functions--------------------------------------------
     fun insertAccount(account: Account) {

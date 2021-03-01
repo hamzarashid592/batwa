@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".TransactionAddEditFragment">
+    tools:context="ui.forms.TransactionAddEditFragment">
 
     <TextView
         android:layout_width="wrap_content"
@@ -99,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_stroke"
                 android:padding="5dp"
+                android:enabled="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Menu"></TextView>
 
         </LinearLayout>
