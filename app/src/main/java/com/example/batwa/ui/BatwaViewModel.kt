@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.batwa.database.Account
+import com.example.batwa.database.AccountTransactionView
 import com.example.batwa.database.BatwaDAO
 import com.example.batwa.database.WalletTransaction
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +17,7 @@ class BatwaViewModel @ViewModelInject constructor(
 
     //--------------------------------------------Program Properties--------------------------------------------
     private var selectedAccount : Account? =null
-    private var currentTransaction : WalletTransaction?=null
+    private var currentTransaction : WalletTransaction= WalletTransaction()
 
     //--------------------------------------------Live Data--------------------------------------------
     var allAccounts = batwaDAO.getAllAccounts().asLiveData()
@@ -72,7 +73,7 @@ class BatwaViewModel @ViewModelInject constructor(
     fun setCurrentTransaction(walletTransaction: WalletTransaction){
         currentTransaction=walletTransaction
     }
-    fun getCurrentTransaction() : WalletTransaction? = currentTransaction
+    fun getCurrentTransaction() : WalletTransaction = currentTransaction
 
     //--------------------------------------------DB Operation Functions--------------------------------------------
     fun insertAccount(account: Account) {

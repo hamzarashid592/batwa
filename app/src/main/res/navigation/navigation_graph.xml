@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_recordsEntryFragmentExpense_to_accountsListFragment"
             app:destination="@id/accountsListFragment" />
+        <action
+            android:id="@+id/action_recordsEntryFragmentExpense_to_transactionCommentsFragment"
+            app:destination="@id/transactionCommentsFragment" />
 
     </fragment>
     <fragment
@@ -38,4 +41,9 @@
         android:label="AccountsListFragment" >
 
     </fragment>
+    <fragment
+        android:id="@+id/transactionCommentsFragment"
+        android:name="com.example.batwa.ui.forms.TransactionCommentsFragment"
+        android:label="fragment_transaction_comments"
+        tools:layout="@layout/fragment_transaction_comments" />
 </navigation>

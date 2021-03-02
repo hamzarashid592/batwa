@@ -15,10 +15,22 @@ data class WalletTransaction(
     @PrimaryKey(autoGenerate = true) val transactionID: Int? = 0,
     val transactionAmount: Double = 0.0,
     val transactionDate: String = "",
+    val transactionTime: String = "",
     val transactionComments: String = "",
     val accountID: Int? = 0,
     val transactionType : String=""
 ){
+//    Empty overloaded constructor
+    constructor():this(
+    null,
+    0.0,
+    "",
+    "",
+    "",
+    null,
+    ""
+    )
+
 //    Static members
     companion object{
         var INCOME="Income"
@@ -36,17 +48,28 @@ data class AccountTransactionRelation(
 )
 
 @DatabaseView("select B.transactionID,B.transactionAmount," +
-        "B.transactionDate,B.transactionComments,B.transactionType" +
+        "B.transactionDate,B.transactionTime,B.transactionComments,B.transactionType" +
         ",A.accountName from Account as A, " +
         "WalletTransaction as B where A.accountID=B.accountID;")
 data class AccountTransactionView(
-    val transactionID: Int,
-    val transactionAmount: Double,
-    val transactionDate: String,
-    val transactionComments: String,
-    val transactionType : String,
-    val accountName: String
+    var transactionID: Int?,
+    var transactionAmount: Double,
+    var transactionDate: String,
+    var transactionTime: String,
+    var transactionComments: String,
+    var transactionType : String,
+    var accountName: String
 )
+{
+    constructor() : this(null,
+                    0.0,
+                    null.toString(),
+                    null.toString(),
+                    null.toString(),
+                    null.toString(),
+                    null.toString()
+    )
+}
 
 
 

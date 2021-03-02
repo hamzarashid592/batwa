@@ -83,13 +83,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:text="Details"
+                    android:text="Comments"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/gray_numbers"
                     android:gravity="center"></TextView>
 
                 <TextView
-                    android:id="@+id/text_view_add_details"
+                    android:id="@+id/text_view_add_comments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tap to Add"

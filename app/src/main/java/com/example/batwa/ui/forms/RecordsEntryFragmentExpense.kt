@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.batwa.database.AccountTransactionView
 import com.example.batwa.database.WalletTransaction
 import com.example.batwa.databinding.FragmentRecordsEntryExpenseBinding
 import com.example.batwa.ui.BatwaViewModel
@@ -46,8 +47,9 @@ class RecordsEntryFragmentExpense : Fragment() {
             findNavController().navigate(RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToAccountsListFragment())
         }
 
-//        Navigating to the notes entry fragment
-        binding.textViewAddDetails.setOnClickListener {
+//        Navigating to the comments entry fragment.
+        binding.textViewAddComments.setOnClickListener {
+            findNavController().navigate(RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToTransactionCommentsFragment())
 
         }
 
@@ -78,7 +80,8 @@ class RecordsEntryFragmentExpense : Fragment() {
                         null,
                         binding.textViewAccountBalanceEntry.text.toString().toDouble(),
                         currentDate,
-                        "Nope",
+                        currentTime,
+                        batwaViewModel.getCurrentTransaction().transactionComments,
                         batwaViewModel.getSelectedAccount()!!.accountID,
                         WalletTransaction.EXPENSE
                     )
