@@ -13,7 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.batwa.R
 import com.example.batwa.database.WalletTransaction
 import com.example.batwa.databinding.FragmentHomeBinding
@@ -155,6 +157,8 @@ class HomeFragment : Fragment() {
                     false
                 )
                 mainScreenTransactionsRecyclerView.adapter = walletTransactionAdapter
+
+
             }
         }
 
@@ -197,6 +201,5 @@ class HomeFragment : Fragment() {
             fabIncome.startAnimation(fab_go_down)
         }
     }
-
-
 }
+
