@@ -46,4 +46,8 @@
         android:name="com.example.batwa.ui.forms.TransactionCommentsFragment"
         android:label="fragment_transaction_comments"
         tools:layout="@layout/fragment_transaction_comments" />
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="com.example.batwa.ui.TransactionsFragment"
+        android:label="TransactionsFragment" />
 </navigation>

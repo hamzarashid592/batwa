@@ -42,6 +42,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Some Comments"
+            android:paddingRight="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Menu"
             ></TextView>
 
@@ -55,12 +56,6 @@
             ></TextView>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Menu"></TextView>
 
     <View
         android:layout_width="match_parent"

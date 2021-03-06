@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.batwa.database.AccountTransactionView
 import com.example.batwa.database.WalletTransaction
 import com.example.batwa.databinding.FragmentRecordsEntryExpenseBinding
 import com.example.batwa.ui.BatwaViewModel
@@ -39,7 +38,7 @@ class RecordsEntryFragmentExpense : Fragment() {
         val binding = FragmentRecordsEntryExpenseBinding.inflate(inflater, container, false)
 
 
-//        -------------------------------------------------------THE OTHER BLOCK-------------------------------------------------------
+//        -------------------------------------------------------THE NAVIGATION BLOCK-------------------------------------------------------
 
 
 //        Navigating to the account selection fragment
@@ -50,13 +49,18 @@ class RecordsEntryFragmentExpense : Fragment() {
 //        Navigating to the comments entry fragment.
         binding.textViewAddComments.setOnClickListener {
             findNavController().navigate(RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToTransactionCommentsFragment())
-
         }
+
+//        Setting the comments text view with the comments entered.
+        if (batwaViewModel.getCurrentTransactionComments()!="")
+            binding.textViewAddComments.text=batwaViewModel.getCurrentTransactionComments()
 
 //        Setting the value of the selected account got from the account selection fragment
         if (batwaViewModel.getSelectedAccount() != null)
             binding.accountSelectionRecordEntry.text =
                 batwaViewModel.getSelectedAccount()!!.accountName
+
+//        -------------------------------------------------------THE SUBMIT BLOCK-------------------------------------------------------
 
 //        The submit button action.
         binding.buttonSubmit.setOnClickListener {
@@ -291,14 +295,5 @@ class RecordsEntryFragmentExpense : Fragment() {
 
 
         return binding.root
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        //    Fetching the account names to be displayed on the spinner
-
-
     }
 }

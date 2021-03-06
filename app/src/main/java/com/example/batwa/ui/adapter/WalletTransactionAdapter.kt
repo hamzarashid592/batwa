@@ -10,20 +10,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.batwa.database.AccountTransactionRelation
 import com.example.batwa.database.AccountTransactionView
 import com.example.batwa.database.WalletTransaction
+import com.example.batwa.databinding.LoTransactionFragmentBinding
 import com.example.batwa.databinding.LoTransactionMainScreenBinding
 
-class WalletTransactionAdapter() :
-    ListAdapter<AccountTransactionView, WalletTransactionAdapter.WalletTransactionMainScreenViewHolder>(transactionUtil()) {
+class WalletTransactionAdapter(
+    var adapterType : String
+) :
+    ListAdapter<AccountTransactionView, RecyclerView.ViewHolder>(transactionUtil()) {
+
+    //Static members to hold the sub type of the adapter.
+    companion object{
+        val TRANSACTION_MAINSCREEN : String="TransactionMainScreen"
+        val TRANSACTION_LIST : String ="TransactionList"
+    }
 
     inner class WalletTransactionMainScreenViewHolder(val binding: LoTransactionMainScreenBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-            fun bindMainScreen(accountTransactionView: AccountTransactionView){
+            fun bind(accountTransactionView: AccountTransactionView){
                 binding.tranAccount.text=accountTransactionView.accountName
                 binding.tranAmmount.text=accountTransactionView.transactionAmount.toString()
                 binding.tranComments.text=accountTransactionView.transactionComments
                 binding.tranDate.text=accountTransactionView.transactionDate
-                binding.test.text=accountTransactionView.transactionID.toString()
                 if (accountTransactionView.transactionType==WalletTransaction.INCOME)
                     binding.tranAmmount.setTextColor(android.graphics.Color.GREEN)
                 else
@@ -31,16 +39,43 @@ class WalletTransactionAdapter() :
             }
     }
 
+    inner class WalletTransactionListViewHolder(val binding: LoTransactionFragmentBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(accountTransactionView: AccountTransactionView){
+            binding.tranAccount.text=accountTransactionView.accountName
+            binding.tranAmmount.text=accountTransactionView.transactionAmount.toString()
+            binding.tranComments.text=accountTransactionView.transactionComments
+            binding.tranDate.text=accountTransactionView.transactionDate
+            binding.tranTime.text=accountTransactionView.transactionTime
+            if (accountTransactionView.transactionType==WalletTransaction.INCOME)
+                binding.tranAmmount.setTextColor(android.graphics.Color.GREEN)
+            else
+                binding.tranAmmount.setTextColor(android.graphics.Color.RED)
+        }
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): WalletTransactionMainScreenViewHolder {
+    ): RecyclerView.ViewHolder {
+        if(adapterType== TRANSACTION_MAINSCREEN)
+        return WalletTransactionMainScreenViewHolder(LoTransactionMainScreenBinding.inflate(
+            LayoutInflater.from(parent.context),parent,false))
+        else if (adapterType== TRANSACTION_LIST)
+            return WalletTransactionListViewHolder(LoTransactionFragmentBinding.inflate(
+                LayoutInflater.from(parent.context),parent,false))
+
+//        The default case. The program will never get here.
         return WalletTransactionMainScreenViewHolder(LoTransactionMainScreenBinding.inflate(
             LayoutInflater.from(parent.context),parent,false))
     }
 
-    override fun onBindViewHolder(holder: WalletTransactionMainScreenViewHolder, position: Int) {
-        holder.bindMainScreen(getItem(position))
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (adapterType== TRANSACTION_MAINSCREEN)
+            (holder as WalletTransactionMainScreenViewHolder).bind(getItem(position))
+        else if (adapterType== TRANSACTION_LIST)
+            (holder as WalletTransactionListViewHolder).bind(getItem(position))
     }
 }
 

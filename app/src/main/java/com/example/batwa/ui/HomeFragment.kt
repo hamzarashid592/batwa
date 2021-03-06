@@ -49,6 +49,8 @@ class HomeFragment : Fragment() {
     //    Creating the view model.
     private val batwaViewModel: BatwaViewModel by activityViewModels()
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -66,9 +68,10 @@ class HomeFragment : Fragment() {
         // Doing view binding for the fragment
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-//        Instantiating the adapters.
+        //    Instantiating the adapters. Adapters should always be declared inside onCreateView.
         val accountAdapter = AccountAdapter(AccountAdapter.ACCOUNT_CARD,batwaViewModel)
-        val walletTransactionAdapter = WalletTransactionAdapter()
+        val walletTransactionAdapter = WalletTransactionAdapter(WalletTransactionAdapter.TRANSACTION_MAINSCREEN)
+
 
 //--------------------------------------------UI Animations--------------------------------------------
 

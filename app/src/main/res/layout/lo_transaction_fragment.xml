@@ -17,8 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Transportation"
-            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-            android:textColor="@color/gray_text"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold"></TextView>
 
         <TextView
@@ -41,8 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Some Comments"
-            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-            android:textColor="@color/gray_text"></TextView>
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"></TextView>
 
     </LinearLayout>
 
@@ -52,6 +50,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="24/01/2020"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+        android:textColor="@color/gray_text"></TextView>
+
+    <TextView
+        android:id="@+id/tran_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01:22 am"
         android:textAppearance="@style/TextAppearance.AppCompat.Menu"
         android:textColor="@color/gray_text"></TextView>
 

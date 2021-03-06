@@ -16,7 +16,7 @@ import com.example.batwa.ui.BatwaViewModel
 
 class AccountAdapter(
     val accountAdapterType: String,
-    val viewModel: BatwaViewModel  //The view model should be passed here.
+    val viewModel: BatwaViewModel  //The view model should be passed here to save the selected account.
 ) : ListAdapter<com.example.batwa.database.Account, RecyclerView.ViewHolder>(accountUtil()) {
 
     //    Static members representing the adapter type

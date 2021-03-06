@@ -73,7 +73,11 @@ class BatwaViewModel @ViewModelInject constructor(
     fun setCurrentTransaction(walletTransaction: WalletTransaction){
         currentTransaction=walletTransaction
     }
+    fun setCurrentTransactionComments(comments : String){
+        currentTransaction.transactionComments=comments
+    }
     fun getCurrentTransaction() : WalletTransaction = currentTransaction
+    fun getCurrentTransactionComments(): String?=currentTransaction.transactionComments
 
     //--------------------------------------------DB Operation Functions--------------------------------------------
     fun insertAccount(account: Account) {
