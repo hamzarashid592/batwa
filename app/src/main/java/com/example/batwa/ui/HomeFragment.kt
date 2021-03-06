@@ -105,6 +105,18 @@ class HomeFragment : Fragment() {
                 .navigate(HomeFragmentDirections.actionHomeFragmentToRecordsEntryFragmentExpense())
         }
 
+//        Addition of Income
+        binding.fabIncome.setOnClickListener {
+            // Returning the fab to the original state
+            if (fab_state == true) {
+                fab_state = false
+                hideRecordEntryFabs(binding)
+            }
+            //Navigating to the fragment
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToRecordsEntryFragmentIncome())
+        }
+
 
 //--------------------------------------------Button click listeners-------------------------------------------
 

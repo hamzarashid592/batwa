@@ -19,6 +19,11 @@ class BatwaViewModel @ViewModelInject constructor(
     private var selectedAccount : Account? =null
     private var currentTransaction : WalletTransaction= WalletTransaction()
 
+//    This variable is for storing the state of the expense/income entry text view. When the user selects an account or
+//    adds a comment, the fragment state is destroyed due to which the expense/income entry text view text is cleared which we don't want.
+//    Therefore we store the state of expense/income entry text view in this property.
+    private var recordEntryBuffer : Double?=null
+
     //--------------------------------------------Live Data--------------------------------------------
     var allAccounts = batwaDAO.getAllAccounts().asLiveData()
     var allTransactions = batwaDAO.getAllTransactions().asLiveData()
@@ -76,8 +81,19 @@ class BatwaViewModel @ViewModelInject constructor(
     fun setCurrentTransactionComments(comments : String){
         currentTransaction.transactionComments=comments
     }
+
+    fun setRecordEntryBuffer(record : Double?){
+        recordEntryBuffer=record
+    }
+    fun clearRecordEntryBuffer(){
+        recordEntryBuffer=null
+    }
+
+
     fun getCurrentTransaction() : WalletTransaction = currentTransaction
     fun getCurrentTransactionComments(): String?=currentTransaction.transactionComments
+
+    fun getRecordEntryBuffer(): Double?=recordEntryBuffer
 
     //--------------------------------------------DB Operation Functions--------------------------------------------
     fun insertAccount(account: Account) {

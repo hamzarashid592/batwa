@@ -29,13 +29,13 @@ class WalletTransactionAdapter(
 
             fun bind(accountTransactionView: AccountTransactionView){
                 binding.tranAccount.text=accountTransactionView.accountName
-                binding.tranAmmount.text=accountTransactionView.transactionAmount.toString()
+                binding.tranAmount.text="PKR ${accountTransactionView.transactionAmount}"
                 binding.tranComments.text=accountTransactionView.transactionComments
                 binding.tranDate.text=accountTransactionView.transactionDate
                 if (accountTransactionView.transactionType==WalletTransaction.INCOME)
-                    binding.tranAmmount.setTextColor(android.graphics.Color.GREEN)
+                    binding.tranAmount.setTextColor(android.graphics.Color.GREEN)
                 else
-                    binding.tranAmmount.setTextColor(android.graphics.Color.RED)
+                    binding.tranAmount.setTextColor(android.graphics.Color.RED)
             }
     }
 
@@ -44,14 +44,14 @@ class WalletTransactionAdapter(
 
         fun bind(accountTransactionView: AccountTransactionView){
             binding.tranAccount.text=accountTransactionView.accountName
-            binding.tranAmmount.text=accountTransactionView.transactionAmount.toString()
+            binding.tranAmount.text="PKR ${accountTransactionView.transactionAmount}"
             binding.tranComments.text=accountTransactionView.transactionComments
             binding.tranDate.text=accountTransactionView.transactionDate
             binding.tranTime.text=accountTransactionView.transactionTime
             if (accountTransactionView.transactionType==WalletTransaction.INCOME)
-                binding.tranAmmount.setTextColor(android.graphics.Color.GREEN)
+                binding.tranAmount.setTextColor(android.graphics.Color.GREEN)
             else
-                binding.tranAmmount.setTextColor(android.graphics.Color.RED)
+                binding.tranAmount.setTextColor(android.graphics.Color.RED)
         }
     }
 

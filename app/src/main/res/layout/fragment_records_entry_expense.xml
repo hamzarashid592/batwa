@@ -28,6 +28,7 @@
             android:autoSizeTextType="uniform"
             android:gravity="end|center_vertical"
             android:hint="0"
+            android:text=""
             android:maxLines="1"
             android:textAlignment="viewEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Display4"

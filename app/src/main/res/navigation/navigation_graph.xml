@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_recordsEntryFragmentExpense"
             app:destination="@id/recordsEntryFragmentExpense" />
+        <action
+            android:id="@+id/action_homeFragment_to_recordsEntryFragmentIncome"
+            app:destination="@id/recordsEntryFragmentIncome" />
 
     </fragment>
     <fragment
@@ -50,4 +53,15 @@
         android:id="@+id/transactionsFragment"
         android:name="com.example.batwa.ui.TransactionsFragment"
         android:label="TransactionsFragment" />
+    <fragment
+        android:id="@+id/recordsEntryFragmentIncome"
+        android:name="com.example.batwa.ui.forms.RecordsEntryFragmentIncome"
+        android:label="Enter your Income" >
+        <action
+            android:id="@+id/action_recordsEntryFragmentIncome_to_accountsListFragment"
+            app:destination="@id/accountsListFragment" />
+        <action
+            android:id="@+id/action_recordsEntryFragmentIncome_to_transactionCommentsFragment"
+            app:destination="@id/transactionCommentsFragment" />
+    </fragment>
 </navigation>

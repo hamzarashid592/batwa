@@ -2,6 +2,7 @@ package com.example.batwa.ui.forms
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,14 +41,31 @@ class RecordsEntryFragmentExpense : Fragment() {
 
 //        -------------------------------------------------------THE NAVIGATION BLOCK-------------------------------------------------------
 
+//        Setting the default text of the record entry text view.
+        if (batwaViewModel.getRecordEntryBuffer()!=null)
+            binding.textViewAccountBalanceEntry.text= batwaViewModel.getRecordEntryBuffer().toString()
 
 //        Navigating to the account selection fragment
         binding.accountSelectionRecordEntry.setOnClickListener {
+//            Storing the state of the record entry text view if it is not null.
+//            Following if is to avoid crashing as null value can't be converted into a string or a double.
+            if (binding.textViewAccountBalanceEntry.text=="")
+                batwaViewModel.clearRecordEntryBuffer()
+            else
+                batwaViewModel.setRecordEntryBuffer(binding.textViewAccountBalanceEntry.text.toString().toDouble())
+//            Navigating...
             findNavController().navigate(RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToAccountsListFragment())
         }
 
 //        Navigating to the comments entry fragment.
         binding.textViewAddComments.setOnClickListener {
+//            Storing the state of the record entry text view if it is not null.
+//            Following if is to avoid crashing as null value can't be converted into a string or a double.
+            if (binding.textViewAccountBalanceEntry.text=="")
+                batwaViewModel.clearRecordEntryBuffer()
+            else
+                batwaViewModel.setRecordEntryBuffer(binding.textViewAccountBalanceEntry.text.toString().toDouble())
+//            Navigating...
             findNavController().navigate(RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToTransactionCommentsFragment())
         }
 
@@ -91,6 +109,10 @@ class RecordsEntryFragmentExpense : Fragment() {
                     )
                 )
                 Toast.makeText(context, "Transaction added successfully", Toast.LENGTH_SHORT).show()
+
+//                Clearing the record entry buffer.
+                batwaViewModel.clearRecordEntryBuffer()
+
                 findNavController().popBackStack()
             }
 
