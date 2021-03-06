@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_recordsEntryFragmentIncome"
             app:destination="@id/recordsEntryFragmentIncome" />
+        <action
+            android:id="@+id/action_homeFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
 
     </fragment>
     <fragment

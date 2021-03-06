@@ -117,6 +117,12 @@ class HomeFragment : Fragment() {
                 .navigate(HomeFragmentDirections.actionHomeFragmentToRecordsEntryFragmentIncome())
         }
 
+//        Navigating to the transaction fragment on SHOW MORE button.
+        binding.textViewShowMoreTransactions.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToTransactionsFragment())
+        }
+
 
 //--------------------------------------------Button click listeners-------------------------------------------
 
