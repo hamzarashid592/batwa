@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_transactionsFragment"
             app:destination="@id/transactionsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_transactionAddEditFragment"
+            app:destination="@id/transactionAddEditFragment" />
 
     </fragment>
     <fragment
@@ -55,7 +58,11 @@
     <fragment
         android:id="@+id/transactionsFragment"
         android:name="com.example.batwa.ui.TransactionsFragment"
-        android:label="TransactionsFragment" />
+        android:label="TransactionsFragment" >
+        <action
+            android:id="@+id/action_transactionsFragment_to_transactionAddEditFragment"
+            app:destination="@id/transactionAddEditFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recordsEntryFragmentIncome"
         android:name="com.example.batwa.ui.forms.RecordsEntryFragmentIncome"
@@ -66,5 +73,13 @@
         <action
             android:id="@+id/action_recordsEntryFragmentIncome_to_transactionCommentsFragment"
             app:destination="@id/transactionCommentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionAddEditFragment"
+        android:name="com.example.batwa.ui.forms.TransactionAddEditFragment"
+        android:label="TransactionAddEditFragment" >
+        <argument
+            android:name="tranID"
+            app:argType="integer" />
     </fragment>
 </navigation>

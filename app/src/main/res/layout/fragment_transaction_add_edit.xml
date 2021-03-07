@@ -136,17 +136,36 @@
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_submit"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/rectangle_stroke"
-        android:text="submit"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-        android:textColor="?attr/colorPrimary"
-        android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/rectangle_stroke"
+            android:text="update"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/rectangle_stroke"
+            android:text="delete"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+    </LinearLayout>
+
 
 
 </LinearLayout>

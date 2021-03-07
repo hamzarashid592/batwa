@@ -108,4 +108,31 @@ class BatwaViewModel @ViewModelInject constructor(
         }
     }
 
+    fun updateTransaction(transaction: WalletTransaction){
+        scope.launch {
+            batwaDAO.updateTransaction(transaction)
+        }
+    }
+
+    fun deleteTransaction(transaction: WalletTransaction){
+        scope.launch {
+            batwaDAO.deleteTransaction(transaction)
+        }
+    }
+
+    fun fetchWalletTransactionFromTranID(tranID : Int) : WalletTransaction{
+        var tran=WalletTransaction()
+        scope.launch {
+            tran=batwaDAO.fetchWalletTransactionFromTranID(tranID)
+        }
+        return tran
+    }
+    fun fetchAccountTransactionViewObjectFromTranID(tranID: Int) : AccountTransactionView{
+        var tran=AccountTransactionView()
+        scope.launch {
+            tran=batwaDAO.fetchAccountTransactionViewObjectFromTranID(tranID)
+        }
+        return tran
+    }
+
 }
