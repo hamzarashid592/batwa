@@ -39,26 +39,19 @@ class TransactionsFragment : Fragment() {
         // Instantiating the adapters.
         val walletTransactionAdapter = WalletTransactionAdapter(WalletTransactionAdapter.TRANSACTION_LIST)
 
-        Log.d("hamza","Fetching the transactions from the viw model and applying them on the adapter.")
-
         //    Fetching the transactions from the viw model and applying them on the adapter.
         batwaViewModel.allTransactions.observe(viewLifecycleOwner) {
-
-            Log.d("hamza","Submitting the transactions to the transaction adapter.")
 
 //            Submitting the transactions to the transaction adapter.
             walletTransactionAdapter.submitList(it)
 
             binding.apply {
-                Log.d("hamza","Configuring the recycler view")
 //                Configuring the recycler view
                 fragmentTransactionsRecyclerView.layoutManager = LinearLayoutManager(
                     context, LinearLayoutManager.VERTICAL,
                     false
                 )
-                Log.d("hamza","Setting ther adapter")
                 fragmentTransactionsRecyclerView.adapter = walletTransactionAdapter
-                Log.d("hamza","Has set ther adapter")
             }
         }
 

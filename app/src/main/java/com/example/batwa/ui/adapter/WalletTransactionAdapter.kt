@@ -12,6 +12,7 @@ import com.example.batwa.database.WalletTransaction
 import com.example.batwa.databinding.LoTransactionFragmentBinding
 import com.example.batwa.databinding.LoTransactionMainScreenBinding
 import com.example.batwa.ui.HomeFragmentDirections
+import com.example.batwa.ui.TransactionsFragmentDirections
 
 class WalletTransactionAdapter(
     var adapterType: String
@@ -31,7 +32,6 @@ class WalletTransactionAdapter(
 
         init {
             binding.root.setOnClickListener {
-                Log.d("hamza","${getItem(pos).transactionID}")
                 it.findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToTransactionAddEditFragment(getItem(pos))
                 )
@@ -52,6 +52,17 @@ class WalletTransactionAdapter(
 
     inner class WalletTransactionListViewHolder(val binding: LoTransactionFragmentBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+
+        var pos : Int = 0
+
+        init {
+            binding.root.setOnClickListener {
+                it.findNavController().navigate(
+                    TransactionsFragmentDirections.actionTransactionsFragmentToTransactionAddEditFragment(getItem(pos))
+                )
+            }
+        }
 
         fun bind(accountTransactionView: AccountTransactionView) {
             binding.tranAccount.text = accountTransactionView.accountName
@@ -92,13 +103,20 @@ class WalletTransactionAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-//        Saving the position of the item.
-        (holder as WalletTransactionMainScreenViewHolder).pos=position
 
-        if (adapterType == TRANSACTION_MAINSCREEN)
+        if (adapterType == TRANSACTION_MAINSCREEN) {
+            //Saving the position of the item.
+            (holder as WalletTransactionMainScreenViewHolder).pos=position
+            //Calling the bind function
             (holder as WalletTransactionMainScreenViewHolder).bind(getItem(position))
-        else if (adapterType == TRANSACTION_LIST)
+        }
+
+        else if (adapterType == TRANSACTION_LIST) {
+            //Saving the position of the item.
+            (holder as WalletTransactionListViewHolder).pos=position
+            //Calling the bind function
             (holder as WalletTransactionListViewHolder).bind(getItem(position))
+        }
     }
 }
 
