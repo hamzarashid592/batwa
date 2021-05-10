@@ -105,7 +105,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_stroke"
                 android:padding="5dp"
-                android:enabled="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Menu"></TextView>
 
         </LinearLayout>

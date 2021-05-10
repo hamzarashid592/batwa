@@ -78,8 +78,10 @@
         android:id="@+id/transactionAddEditFragment"
         android:name="com.example.batwa.ui.forms.TransactionAddEditFragment"
         android:label="TransactionAddEditFragment" >
+
+
         <argument
-            android:name="tranID"
-            app:argType="integer" />
+            android:name="accountTranViewArg"
+            app:argType="com.example.batwa.database.AccountTransactionView" />
     </fragment>
 </navigation>

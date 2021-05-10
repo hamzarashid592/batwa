@@ -1,5 +1,6 @@
 package com.example.batwa.ui
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -8,6 +9,7 @@ import com.example.batwa.database.AccountTransactionView
 import com.example.batwa.database.BatwaDAO
 import com.example.batwa.database.WalletTransaction
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 
 class BatwaViewModel @ViewModelInject constructor(
@@ -121,14 +123,30 @@ class BatwaViewModel @ViewModelInject constructor(
     }
 
     fun fetchWalletTransactionFromTranID(tranID : Int) : WalletTransaction{
-        var tran=WalletTransaction()
+        var tran = WalletTransaction()
         scope.launch {
             tran=batwaDAO.fetchWalletTransactionFromTranID(tranID)
+
+//            this.coroutineContext.job.join()
+            Log.d("hamza","In DAO inside scope")
+            Log.d("hamza","tran.transactionID ${tran.transactionID}")
+            Log.d("hamza","tran.transactionAmount ${tran.transactionAmount}")
+            Log.d("hamza","tran.transactionDate ${tran.transactionDate}")
+            Log.d("hamza","tran.transactionTime ${tran.transactionTime}")
+            Log.d("hamza","tran.transactionType ${tran.transactionType}")
         }
+        Log.d("hamza","In DAO outside scope")
+        Log.d("hamza","tran.transactionID ${tran.transactionID}")
+        Log.d("hamza","tran.transactionAmount ${tran.transactionAmount}")
+        Log.d("hamza","tran.transactionDate ${tran.transactionDate}")
+        Log.d("hamza","tran.transactionTime ${tran.transactionTime}")
+        Log.d("hamza","tran.transactionType ${tran.transactionType}")
+
+
         return tran
     }
     fun fetchAccountTransactionViewObjectFromTranID(tranID: Int) : AccountTransactionView{
-        var tran=AccountTransactionView()
+        var tran =AccountTransactionView()
         scope.launch {
             tran=batwaDAO.fetchAccountTransactionViewObjectFromTranID(tranID)
         }

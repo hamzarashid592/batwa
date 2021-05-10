@@ -1,6 +1,8 @@
 package com.example.batwa.database
 
+import android.os.Parcelable
 import androidx.room.*
+import kotlinx.parcelize.Parcelize
 
 @Entity
 data class Account(
@@ -47,9 +49,10 @@ data class AccountTransactionRelation(
     val accountTransactions: List<WalletTransaction>
 )
 
+@Parcelize
 @DatabaseView("select B.transactionID,B.transactionAmount," +
         "B.transactionDate,B.transactionTime,B.transactionComments,B.transactionType" +
-        ",A.accountName from Account as A, " +
+        ",A.accountName,A.accountID from Account as A, " +
         "WalletTransaction as B where A.accountID=B.accountID;")
 data class AccountTransactionView(
     var transactionID: Int?,
@@ -58,8 +61,9 @@ data class AccountTransactionView(
     var transactionTime: String,
     var transactionComments: String,
     var transactionType : String,
-    var accountName: String
-)
+    var accountName: String,
+    var accountID: Int?
+) : Parcelable
 {
     constructor() : this(null,
                     0.0,
@@ -67,7 +71,8 @@ data class AccountTransactionView(
                     null.toString(),
                     null.toString(),
                     null.toString(),
-                    null.toString()
+                    null.toString(),
+                    null
     )
 }
 

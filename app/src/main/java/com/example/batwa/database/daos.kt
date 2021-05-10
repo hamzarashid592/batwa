@@ -35,9 +35,9 @@ interface BatwaDAO{
 
 //   To fetch transaction from transaction id.
     @Query("Select * from WalletTransaction where transactionID=:tranID")
-    fun fetchWalletTransactionFromTranID(tranID : Int) : WalletTransaction
+    suspend fun fetchWalletTransactionFromTranID(tranID : Int) : WalletTransaction
 
 //   To fetch an account transaction view object from transaction id.
     @Query("Select * from AccountTransactionView where transactionID=:tranID")
-    fun fetchAccountTransactionViewObjectFromTranID(tranID : Int) : AccountTransactionView
+    suspend fun fetchAccountTransactionViewObjectFromTranID(tranID : Int) : AccountTransactionView
 }

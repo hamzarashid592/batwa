@@ -1,14 +1,12 @@
 package com.example.batwa.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.batwa.database.AccountTransactionRelation
 import com.example.batwa.database.AccountTransactionView
 import com.example.batwa.database.WalletTransaction
 import com.example.batwa.databinding.LoTransactionFragmentBinding
@@ -33,8 +31,9 @@ class WalletTransactionAdapter(
 
         init {
             binding.root.setOnClickListener {
+                Log.d("hamza","${getItem(pos).transactionID}")
                 it.findNavController().navigate(
-                    HomeFragmentDirections.actionHomeFragmentToTransactionAddEditFragment(getItem(pos).transactionID!!)
+                    HomeFragmentDirections.actionHomeFragmentToTransactionAddEditFragment(getItem(pos))
                 )
             }
         }
