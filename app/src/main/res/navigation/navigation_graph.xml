@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_accountAddEditFragment"
-            app:destination="@id/accountAddEditFragment"
+            app:destination="@id/accountAddFragment"
             app:enterAnim="@anim/bottom_up"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
@@ -57,7 +57,7 @@
 
     </fragment>
     <fragment
-        android:id="@+id/accountAddEditFragment"
+        android:id="@+id/accountAddFragment"
         android:name="com.example.batwa.ui.forms.AccountAddFragment"
         android:label="Add an Account"
         tools:layout="@layout/fragment_account_add" />
@@ -139,6 +139,13 @@
         <action
             android:id="@+id/action_accountsSettingsFragment_to_accountEditFragment"
             app:destination="@id/accountEditFragment"
+            app:enterAnim="@anim/bottom_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/bottom_down"/>
+        <action
+            android:id="@+id/action_accountsSettingsFragment_to_accountAddFragment"
+            app:destination="@id/accountAddFragment"
             app:enterAnim="@anim/bottom_up"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"

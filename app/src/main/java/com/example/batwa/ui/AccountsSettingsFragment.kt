@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.batwa.databinding.FragmentAccountsSettingsBinding
 import com.example.batwa.ui.adapter.AccountAdapter
@@ -29,25 +30,30 @@ class AccountsSettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding= FragmentAccountsSettingsBinding.inflate(inflater,container,false)
+        val binding = FragmentAccountsSettingsBinding.inflate(inflater, container, false)
 
         // Instantiating the adapters.
-        val accountAdapter = AccountAdapter(AccountAdapter.ACCOUNT_SETTINGS,batwaViewModel)
+        val accountAdapter = AccountAdapter(AccountAdapter.ACCOUNT_SETTINGS, batwaViewModel)
 
-        //    Fetching the transactions from the viw model and applying them on the adapter.
+        //Fetching the transactions from the view model and applying them on the adapter.
         batwaViewModel.allAccounts.observe(viewLifecycleOwner) {
 
-//            Submitting the transactions to the transaction adapter.
+            //Submitting the transactions to the transaction adapter.
             accountAdapter.submitList(it)
 
             binding.apply {
-//                Configuring the recycler view
+            //Configuring the recycler view
                 accountsSettingsRecyclerView.layoutManager = LinearLayoutManager(
                     context, LinearLayoutManager.VERTICAL,
                     false
                 )
                 accountsSettingsRecyclerView.adapter = accountAdapter
             }
+        }
+
+        //Navigating to the add account fragment on tapping the add account fab.
+        binding.fabAddAccount.setOnClickListener {
+            it.findNavController().navigate(AccountsSettingsFragmentDirections.actionAccountsSettingsFragmentToAccountAddFragment())
         }
 
 
