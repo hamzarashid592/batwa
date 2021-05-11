@@ -12,19 +12,41 @@
         <action
             android:id="@+id/action_homeFragment_to_accountAddEditFragment"
             app:destination="@id/accountAddEditFragment"
+            app:enterAnim="@anim/bottom_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/bottom_down"
             />
         <action
             android:id="@+id/action_homeFragment_to_recordsEntryFragmentExpense"
-            app:destination="@id/recordsEntryFragmentExpense" />
+            app:destination="@id/recordsEntryFragmentExpense"
+            app:enterAnim="@anim/bottom_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/bottom_down"></action>
         <action
             android:id="@+id/action_homeFragment_to_recordsEntryFragmentIncome"
-            app:destination="@id/recordsEntryFragmentIncome" />
+            app:destination="@id/recordsEntryFragmentIncome"
+            app:enterAnim="@anim/bottom_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/bottom_down"
+            ></action>
         <action
             android:id="@+id/action_homeFragment_to_transactionsFragment"
-            app:destination="@id/transactionsFragment" />
+            app:destination="@id/transactionsFragment"
+            app:enterAnim="@anim/to_left"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/to_right"
+            />
         <action
             android:id="@+id/action_homeFragment_to_transactionAddEditFragment"
-            app:destination="@id/transactionAddEditFragment" />
+            app:destination="@id/transactionAddEditFragment"
+            app:enterAnim="@anim/bottom_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/bottom_down"/>
 
     </fragment>
     <fragment
@@ -38,10 +60,18 @@
         android:label="Enter your Expense" >
         <action
             android:id="@+id/action_recordsEntryFragmentExpense_to_accountsListFragment"
-            app:destination="@id/accountsListFragment" />
+            app:destination="@id/accountsListFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
         <action
             android:id="@+id/action_recordsEntryFragmentExpense_to_transactionCommentsFragment"
-            app:destination="@id/transactionCommentsFragment" />
+            app:destination="@id/transactionCommentsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
 
     </fragment>
     <fragment
@@ -61,7 +91,11 @@
         android:label="TransactionsFragment" >
         <action
             android:id="@+id/action_transactionsFragment_to_transactionAddEditFragment"
-            app:destination="@id/transactionAddEditFragment" />
+            app:destination="@id/transactionAddEditFragment"
+            app:enterAnim="@anim/bottom_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/bottom_down"/>
     </fragment>
     <fragment
         android:id="@+id/recordsEntryFragmentIncome"
@@ -69,17 +103,23 @@
         android:label="Enter your Income" >
         <action
             android:id="@+id/action_recordsEntryFragmentIncome_to_accountsListFragment"
-            app:destination="@id/accountsListFragment" />
+            app:destination="@id/accountsListFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
         <action
             android:id="@+id/action_recordsEntryFragmentIncome_to_transactionCommentsFragment"
-            app:destination="@id/transactionCommentsFragment" />
+            app:destination="@id/transactionCommentsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
     </fragment>
     <fragment
         android:id="@+id/transactionAddEditFragment"
         android:name="com.example.batwa.ui.forms.TransactionAddEditFragment"
         android:label="TransactionAddEditFragment" >
-
-
         <argument
             android:name="accountTranViewArg"
             app:argType="com.example.batwa.database.AccountTransactionView" />
