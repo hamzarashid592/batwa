@@ -67,10 +67,9 @@ public class BatwaCallback @Inject constructor(
 
           scope.launch {
 
-               dao.insertAccount(Account(null,"Transport",200.0,0))
-               dao.insertAccount(Account(null,"Test Account 2",0.0,0))
+               dao.insertAccount(Account(null,"Test",0.0,0))
 
-               dao.insertTransaction(WalletTransaction(null,10.2,"24/09/2021","12:00 AM",
+               dao.insertTransaction(WalletTransaction(null,1000.0,"24/09/2021","12:00 AM",
                "Test transaction",1,transactionType = WalletTransaction.EXPENSE))
           }
 
