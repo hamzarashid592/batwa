@@ -42,15 +42,6 @@ class TransactionAddEditFragment : Fragment() {
 //        Fetching the account name and transaction amount of the current transaction that was tapped.
         val accountTranView = transactionAddEditFragmentArgs.accountTranViewArg
 
-
-////        Fetching the Account Transaction View object from the tranID.
-//        val currentTransactionViewObject=
-//            batwaViewModel.fetchAccountTransactionViewObjectFromTranID(tranID)
-//
-//        Fetching the Wallet Transaction object from the tranID.
-//        val currentWalletTransaction=batwaViewModel.fetchWalletTransactionFromTranID(accountTranView.transactionID!!)
-
-
 //        Setting the text of the edit text fields based on the current transaction.
         binding.textViewAccount.text = accountTranView.accountName
         binding.editTextAmount.text = accountTranView.transactionAmount.toString().toEditable()

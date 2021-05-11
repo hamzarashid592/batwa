@@ -5,13 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.batwa.database.Account
 import com.example.batwa.databinding.LoAccountCardBinding
 import com.example.batwa.databinding.LoAccountListBinding
+import com.example.batwa.databinding.LoAccountSettingsBinding
+import com.example.batwa.ui.AccountsSettingsFragmentDirections
 import com.example.batwa.ui.BatwaViewModel
+import com.example.batwa.ui.HomeFragmentDirections
 
 
 class AccountAdapter(
@@ -23,6 +27,7 @@ class AccountAdapter(
     companion object {
         val ACCOUNT_CARD: String = "account_card"
         val ACCOUNT_LIST: String = "account_list"
+        val ACCOUNT_SETTINGS: String = "account_settings"
     }
 
 
@@ -35,6 +40,26 @@ class AccountAdapter(
             binding.textViewAccountName.text = card_account.accountName
         }
 
+    }
+
+    //    Account settings adapter type
+    inner class AccountSettingsViewHolder(val binding: LoAccountSettingsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        //The position variable
+        var pos = 0
+
+        //The on click listener
+        init {
+            binding.root.setOnClickListener {
+                binding.root.findNavController()
+                    .navigate(AccountsSettingsFragmentDirections.actionAccountsSettingsFragmentToAccountEditFragment(getItem(pos)))
+            }
+        }
+        fun bindSettings(settings_account: com.example.batwa.database.Account) {
+            binding.textViewAccountName.text = settings_account.accountName
+            binding.textViewAccountBalance.text="PKR ${settings_account.accountBalance.toString()}"
+        }
     }
 
     //    Account list adapter type
@@ -71,6 +96,14 @@ class AccountAdapter(
                     false
                 )
             )
+        else if (accountAdapterType == ACCOUNT_SETTINGS)
+            return AccountSettingsViewHolder(
+                LoAccountSettingsBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
         else if (accountAdapterType == ACCOUNT_LIST)
             return AccountListViewHolder(
                 LoAccountListBinding.inflate(
@@ -94,12 +127,17 @@ class AccountAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
 
-        if (accountAdapterType == ACCOUNT_CARD)
+        if (accountAdapterType == ACCOUNT_CARD) {
             (holder as AccountCardViewHolder).bindCard(getItem(position))
-        else if (accountAdapterType == ACCOUNT_LIST) {
+        } else if (accountAdapterType == ACCOUNT_SETTINGS) {
+            //Storing the position.
+            (holder as AccountSettingsViewHolder).pos=position
+            //Binding the view
+            (holder as AccountSettingsViewHolder).bindSettings(getItem(position))
+        } else if (accountAdapterType == ACCOUNT_LIST) {
             val listHolder = (holder as AccountListViewHolder)
 //            Saving the selected item as the property of the account list class for later use.
-            listHolder.selectedItem=getItem(position)
+            listHolder.selectedItem = getItem(position)
             listHolder.bindList(listHolder.selectedItem)
         }
     }

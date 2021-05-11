@@ -104,6 +104,18 @@ class BatwaViewModel @ViewModelInject constructor(
         }
     }
 
+    fun updateAccount(account: Account) {
+        scope.launch {
+            batwaDAO.updateAccount(account)
+        }
+    }
+
+    fun deleteAccount(account: Account) {
+        scope.launch {
+            batwaDAO.deleteAccount(account)
+        }
+    }
+
     fun insertTransaction(transaction: WalletTransaction) {
         scope.launch {
             batwaDAO.insertTransaction(transaction)

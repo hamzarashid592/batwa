@@ -18,7 +18,6 @@
             android:layout_height="wrap_content"
             android:text="Transportation"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-
             ></TextView>
 
         <TextView
@@ -27,6 +26,7 @@
             android:layout_height="wrap_content"
             android:text="Balance: PKR 200"
             android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textStyle="bold"
             android:textColor="@android:color/holo_red_dark"
             ></TextView>
 

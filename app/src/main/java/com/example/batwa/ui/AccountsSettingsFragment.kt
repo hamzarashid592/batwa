@@ -1,55 +1,58 @@
 package com.example.batwa.ui
 
-//import android.app.Activity
-//import android.content.Context
-//import android.os.Bundle
-//import androidx.fragment.app.Fragment
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import androidx.recyclerview.widget.LinearLayoutManager
-//import androidx.recyclerview.widget.RecyclerView
-//import kotlinx.android.synthetic.main.fragment_accounts_settings.*
-//
-//
-//class AccountsSettingsFragment : Fragment() {
-//
-//    private lateinit var dbHelper : DBHelper
-//    private var accountsList=ArrayList<Account>()
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//    }
-//
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        dbHelper= DBHelper(context,null)
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_accounts_settings, container, false)
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-////        Fetching the account details.
-//        accountsList=dbHelper.getAccountRecordList()
-//
-////        Setting the type of the accounts to list.
-//        accountsList.forEach { it.type=Account.ACCOUNT_SETTINGS }
-//
-////        Putting the data in the adapter
-//
-//        var layoutManager : RecyclerView.LayoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-//        var adapter: AccountsAdapter? = context?.let { AccountsAdapter(it,accountsList) }
-//        accounts_settings_recycler_view.adapter=adapter
-//        accounts_settings_recycler_view.layoutManager=layoutManager
-//
-//    }
-//}
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.batwa.databinding.FragmentAccountsSettingsBinding
+import com.example.batwa.ui.adapter.AccountAdapter
+import com.example.batwa.ui.adapter.WalletTransactionAdapter
+
+
+class AccountsSettingsFragment : Fragment() {
+
+    //    Creating the view model.
+    private val batwaViewModel: BatwaViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val binding= FragmentAccountsSettingsBinding.inflate(inflater,container,false)
+
+        // Instantiating the adapters.
+        val accountAdapter = AccountAdapter(AccountAdapter.ACCOUNT_SETTINGS,batwaViewModel)
+
+        //    Fetching the transactions from the viw model and applying them on the adapter.
+        batwaViewModel.allAccounts.observe(viewLifecycleOwner) {
+
+//            Submitting the transactions to the transaction adapter.
+            accountAdapter.submitList(it)
+
+            binding.apply {
+//                Configuring the recycler view
+                accountsSettingsRecyclerView.layoutManager = LinearLayoutManager(
+                    context, LinearLayoutManager.VERTICAL,
+                    false
+                )
+                accountsSettingsRecyclerView.adapter = accountAdapter
+            }
+        }
+
+
+        return binding.root
+    }
+
+
+}

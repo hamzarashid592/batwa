@@ -5,12 +5,13 @@ import androidx.room.*
 import kotlinx.parcelize.Parcelize
 
 @Entity
+@Parcelize
 data class Account(
     @PrimaryKey(autoGenerate = true) val accountID: Int? = 0,
     var accountName: String = "",
     var accountBalance: Double = 0.0,
     var accountNumRecords: Int = 0
-)
+) : Parcelable
 
 @Entity
 data class WalletTransaction(

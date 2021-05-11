@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".ui.forms.AccountAddFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Account Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"></TextView>
+
+    <EditText
+        android:id="@+id/edit_text_account_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rectangle_stroke"
+        android:hint="Account Name"
+        android:inputType="text"
+        android:padding="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu"></EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Starting Balance"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"></TextView>
+
+    <EditText
+        android:id="@+id/edit_text_account_balance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rectangle_stroke"
+        android:hint="Amount in PKR"
+        android:inputType="number"
+        android:padding="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu"></EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_update"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="update"
+            android:textAllCaps="true"
+            android:textColor="?attr/colorPrimary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textStyle="bold"
+            android:background="@drawable/rectangle_stroke"
+            android:layout_marginHorizontal="20dp"></androidx.appcompat.widget.AppCompatButton>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_delete"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:textAllCaps="true"
+            android:textColor="?attr/colorPrimary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textStyle="bold"
+            android:background="@drawable/rectangle_stroke"
+            android:layout_marginHorizontal="20dp"></androidx.appcompat.widget.AppCompatButton>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

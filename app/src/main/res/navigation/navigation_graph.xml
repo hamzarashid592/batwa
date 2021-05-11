@@ -47,13 +47,20 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/bottom_down"/>
+        <action
+            android:id="@+id/action_homeFragment_to_accountsSettingsFragment"
+            app:destination="@id/accountsSettingsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
 
     </fragment>
     <fragment
         android:id="@+id/accountAddEditFragment"
-        android:name="com.example.batwa.ui.forms.AccountAddEditFragment"
-        android:label="Add/Edit Account"
-        tools:layout="@layout/fragment_account_add_edit" />
+        android:name="com.example.batwa.ui.forms.AccountAddFragment"
+        android:label="Add an Account"
+        tools:layout="@layout/fragment_account_add" />
     <fragment
         android:id="@+id/recordsEntryFragmentExpense"
         android:name="com.example.batwa.ui.forms.RecordsEntryFragmentExpense"
@@ -77,18 +84,18 @@
     <fragment
         android:id="@+id/accountsListFragment"
         android:name="com.example.batwa.ui.AccountsListFragment"
-        android:label="AccountsListFragment" >
+        android:label="Select an Account" >
 
     </fragment>
     <fragment
         android:id="@+id/transactionCommentsFragment"
         android:name="com.example.batwa.ui.forms.TransactionCommentsFragment"
-        android:label="fragment_transaction_comments"
+        android:label="Add your Comments"
         tools:layout="@layout/fragment_transaction_comments" />
     <fragment
         android:id="@+id/transactionsFragment"
         android:name="com.example.batwa.ui.TransactionsFragment"
-        android:label="TransactionsFragment" >
+        android:label="All Transactions" >
         <action
             android:id="@+id/action_transactionsFragment_to_transactionAddEditFragment"
             app:destination="@id/transactionAddEditFragment"
@@ -119,9 +126,32 @@
     <fragment
         android:id="@+id/transactionAddEditFragment"
         android:name="com.example.batwa.ui.forms.TransactionAddEditFragment"
-        android:label="TransactionAddEditFragment" >
+        android:label="Edit A Record" >
         <argument
             android:name="accountTranViewArg"
             app:argType="com.example.batwa.database.AccountTransactionView" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountsSettingsFragment"
+        android:name="com.example.batwa.ui.AccountsSettingsFragment"
+        android:label="Account Settings" >
+
+        <action
+            android:id="@+id/action_accountsSettingsFragment_to_accountEditFragment"
+            app:destination="@id/accountEditFragment"
+            app:enterAnim="@anim/bottom_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/bottom_down"/>
+    </fragment>
+    <fragment
+        android:id="@+id/accountEditFragment"
+        android:name="com.example.batwa.ui.forms.AccountEditFragment"
+        android:label="Edit an Account">
+
+        <argument
+            android:name="selectedAccount"
+            app:argType="com.example.batwa.database.Account" />
+
     </fragment>
 </navigation>

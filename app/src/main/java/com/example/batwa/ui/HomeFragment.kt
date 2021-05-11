@@ -125,6 +125,11 @@ class HomeFragment : Fragment() {
                 .navigate(HomeFragmentDirections.actionHomeFragmentToTransactionsFragment())
         }
 
+//        Navigating to the account settings fragment
+        binding.iconAccountsSettings.setOnClickListener {
+            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAccountsSettingsFragment())
+        }
+
 
 //--------------------------------------------Button click listeners-------------------------------------------
 
