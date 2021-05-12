@@ -10,9 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.batwa.database.Account
 import com.example.batwa.database.AccountTransactionView
 import com.example.batwa.database.WalletTransaction
 import com.example.batwa.databinding.FragmentTransactionAddEditBinding
@@ -46,9 +49,40 @@ class TransactionAddEditFragment : Fragment() {
         binding.textViewAccount.text = accountTranView.accountName
         binding.editTextAmount.text = accountTranView.transactionAmount.toString().toEditable()
         binding.editTextComments.text = accountTranView.transactionComments.toString().toEditable()
-        binding.textViewTranType.text = accountTranView.transactionType
+        //binding.textViewTranType.text = accountTranView.transactionType
         binding.textViewDate.text = accountTranView.transactionDate
         binding.textViewTime.text = accountTranView.transactionTime
+
+        //Populating the spinner.
+        val choices= arrayOf<String>(WalletTransaction.INCOME, WalletTransaction.EXPENSE)
+        // Create an ArrayAdapter having choices (income and expense) and a default spinner layout
+        val arrayAdp = context?.let {
+            ArrayAdapter(
+                it,
+                android.R.layout.simple_spinner_item,
+                choices
+            )
+        }
+        // Specify the layout to use when the list of choices appears
+        arrayAdp?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Apply the adapter to the spinner
+        binding.spinnerTranType.adapter = arrayAdp
+        //Setting the default selection.
+        binding.spinnerTranType.setSelection(choices.indexOf(accountTranView.transactionType))
+        var newTranType = ""
+
+        binding.spinnerTranType.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                newTranType=choices[position]
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
 
 
 //        Updating that current transaction
@@ -59,20 +93,20 @@ class TransactionAddEditFragment : Fragment() {
             val newComments = binding.editTextComments.text.toString()
 
 //        Making a new wallet transaction object from the account transaction view + the user input
-            val newWalletTransaction=WalletTransaction(
+            val newWalletTransaction = WalletTransaction(
                 accountTranView.transactionID,
                 newAmount,
                 accountTranView.transactionDate,
                 accountTranView.transactionTime,
                 newComments,
                 accountTranView.accountID,
-                accountTranView.transactionType
+                newTranType
             )
 
-            val changed=batwaViewModel.updateTransaction(
+            val changed = batwaViewModel.updateTransaction(
                 newWalletTransaction
             )
-            Log.d("hamza","$changed rows updated")
+            Log.d("hamza", "$changed rows updated")
             //Hiding the soft keyboard
             val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
@@ -84,7 +118,7 @@ class TransactionAddEditFragment : Fragment() {
         binding.buttonDelete.setOnClickListener {
 
 //        Making a new wallet transaction object from the account transaction view + the user input
-            val newWalletTransaction=WalletTransaction(
+            val newWalletTransaction = WalletTransaction(
                 accountTranView.transactionID,
                 0.0,
                 accountTranView.transactionDate,
@@ -95,8 +129,8 @@ class TransactionAddEditFragment : Fragment() {
             )
 
 
-            val changed=batwaViewModel.deleteTransaction(newWalletTransaction)
-            Log.d("hamza","$changed rows deleted")
+            val changed = batwaViewModel.deleteTransaction(newWalletTransaction)
+            Log.d("hamza", "$changed rows deleted")
             //Hiding the soft keyboard
             val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
