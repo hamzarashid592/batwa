@@ -54,9 +54,21 @@ public class BatwaCallback @Inject constructor(
                   "begin\n" +
                   "update Account set accountBalance=\n" +
                   "    case \n" +
-                  "        when new.transactionType=\"Expense\" then accountBalance-new.transactionAmount \n" +
-                  "        when new.transactionType=\"Income\" then accountBalance+new.transactionAmount \n" +
-                  "    end;\n" +
+                  "        when new.transactionType=\"Expense\" AND old.transactionType=\"Income\" AND old.transactionAmount=new.transactionAmount THEN accountBalance - old.transactionAmount - old.transactionAmount\n" +
+                  "        \n" +
+                  "        when new.transactionType=\"Income\" AND old.transactionType=\"Expense\" AND old.transactionAmount=new.transactionAmount THEN accountBalance + old.transactionAmount + old.transactionAmount\n" +
+                  "        \n" +
+                  "        when old.transactionType=\"Expense\" AND new.transactionType=old.transactionType THEN accountBalance + old.transactionAmount - new.transactionAmount\n" +
+                  "        \n" +
+                  "        when old.transactionType=\"Income\" AND new.transactionType=old.transactionType THEN accountBalance - old.transactionAmount + new.transactionAmount\n" +
+                  "        \n" +
+                  "        when new.transactionType=\"Expense\" AND old.transactionType=\"Income\" AND old.transactionAmount!=new.transactionAmount THEN accountBalance - old.transactionAmount - new.transactionAmount\n" +
+                  "        \n" +
+                  "        when new.transactionType=\"Income\" AND old.transactionType=\"Expense\" AND old.transactionAmount!=new.transactionAmount THEN accountBalance + old.transactionAmount + new.transactionAmount\n" +
+                  "        \n" +
+                  "        \n" +
+                  "    end\n" +
+                  "    where accountID=old.accountID;\n" +
                   "end "
 
           db.execSQL(on_insert)
@@ -67,7 +79,7 @@ public class BatwaCallback @Inject constructor(
 
           scope.launch {
 
-               dao.insertAccount(Account(null,"Test",0.0,0))
+               dao.insertAccount(Account(null,"Test",5000.0,0))
 
                dao.insertTransaction(WalletTransaction(null,1000.0,"24/09/2021","12:00 AM",
                "Test transaction",1,transactionType = WalletTransaction.EXPENSE))
