@@ -108,8 +108,7 @@ class TransactionAddEditFragment : Fragment() {
             )
             Log.d("hamza", "$changed rows updated")
             //Hiding the soft keyboard
-            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+            closeSoftKeyboard()
             //Navigating back
             findNavController().popBackStack()
         }
@@ -139,6 +138,22 @@ class TransactionAddEditFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    //Hiding the soft keyboard in the onStop method.
+    override fun onStop() {
+        closeSoftKeyboard()
+        super.onStop()
+    }
+
+    //The close keyboard method.
+    private fun closeSoftKeyboard() : Unit{
+        val view= view?.findFocus()
+        if (view!=null) {
+            val imm =
+                activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view!!.windowToken, 0)
+        }
     }
 
 

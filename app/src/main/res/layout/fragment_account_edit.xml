@@ -22,7 +22,7 @@
         android:background="@drawable/rectangle_stroke"
         android:hint="Account Name"
         android:inputType="text"
-        android:padding="5dp"
+        android:padding="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Menu"></EditText>
 
     <TextView
@@ -40,7 +40,7 @@
         android:background="@drawable/rectangle_stroke"
         android:hint="Amount in PKR"
         android:inputType="numberDecimal"
-        android:padding="5dp"
+        android:padding="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Menu"></EditText>
 
     <LinearLayout

@@ -58,18 +58,34 @@ class AccountAddFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-//          Hiding the soft keyboard
-                val imm =
-                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+                //Hiding the soft keyboard
+                closeSoftKeyboard()
+                //Going to previous fragment
                 findNavController().popBackStack()
             }
 
         }
 
 
+
         return binding.root
     }
 
+    //Hiding the soft keyboard in the onStop method.
+    override fun onStop() {
+        closeSoftKeyboard()
+        super.onStop()
+    }
+
+    //The close keyboard method.
+    private fun closeSoftKeyboard() : Unit{
+        val view= view?.findFocus()
+        if (view!=null) {
+            val imm =
+                activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view!!.windowToken, 0)
+        }
+    }
 
 }
+
