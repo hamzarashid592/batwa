@@ -16,6 +16,7 @@ import com.example.batwa.databinding.LoAccountSettingsBinding
 import com.example.batwa.ui.AccountsSettingsFragmentDirections
 import com.example.batwa.ui.BatwaViewModel
 import com.example.batwa.ui.HomeFragmentDirections
+import java.text.DecimalFormat
 
 
 class AccountAdapter(
@@ -36,7 +37,11 @@ class AccountAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindCard(card_account: com.example.batwa.database.Account) {
-            binding.textViewAccountBalance.text = "PKR ${card_account.accountBalance}"
+            //To print comma separated digits.
+            val decimalFormat=DecimalFormat("#.##")
+            decimalFormat.groupingSize=3
+            decimalFormat.isGroupingUsed=true
+            binding.textViewAccountBalance.text = "PKR ${decimalFormat.format(card_account.accountBalance)}"
             binding.textViewAccountName.text = card_account.accountName
         }
 
@@ -58,7 +63,10 @@ class AccountAdapter(
         }
         fun bindSettings(settings_account: com.example.batwa.database.Account) {
             binding.textViewAccountName.text = settings_account.accountName
-            binding.textViewAccountBalance.text="PKR ${settings_account.accountBalance.toString()}"
+            val decimalFormat=DecimalFormat("#.##")
+            decimalFormat.groupingSize=3
+            decimalFormat.isGroupingUsed=true
+            binding.textViewAccountBalance.text="PKR ${decimalFormat.format(settings_account.accountBalance)}"
         }
     }
 

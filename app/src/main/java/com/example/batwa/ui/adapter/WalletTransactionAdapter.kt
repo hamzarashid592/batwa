@@ -13,6 +13,7 @@ import com.example.batwa.databinding.LoTransactionFragmentBinding
 import com.example.batwa.databinding.LoTransactionMainScreenBinding
 import com.example.batwa.ui.HomeFragmentDirections
 import com.example.batwa.ui.TransactionsFragmentDirections
+import java.text.DecimalFormat
 
 class WalletTransactionAdapter(
     var adapterType: String
@@ -40,7 +41,11 @@ class WalletTransactionAdapter(
 
         fun bind(accountTransactionView: AccountTransactionView) {
             binding.tranAccount.text = accountTransactionView.accountName
-            binding.tranAmount.text = "PKR ${accountTransactionView.transactionAmount}"
+            //To print comma separated digits.
+            val decimalFormat= DecimalFormat("#.##")
+            decimalFormat.groupingSize=3
+            decimalFormat.isGroupingUsed=true
+            binding.tranAmount.text = "PKR ${decimalFormat.format(accountTransactionView.transactionAmount)}"
             binding.tranComments.text = accountTransactionView.transactionComments
             binding.tranDate.text = accountTransactionView.transactionDate
             if (accountTransactionView.transactionType == WalletTransaction.INCOME)
@@ -66,7 +71,11 @@ class WalletTransactionAdapter(
 
         fun bind(accountTransactionView: AccountTransactionView) {
             binding.tranAccount.text = accountTransactionView.accountName
-            binding.tranAmount.text = "PKR ${accountTransactionView.transactionAmount}"
+            //To print comma separated digits.
+            val decimalFormat= DecimalFormat("#.##")
+            decimalFormat.groupingSize=3
+            decimalFormat.isGroupingUsed=true
+            binding.tranAmount.text = "PKR ${decimalFormat.format(accountTransactionView.transactionAmount)}"
             binding.tranComments.text = accountTransactionView.transactionComments
             binding.tranDate.text = accountTransactionView.transactionDate
             binding.tranTime.text = accountTransactionView.transactionTime
