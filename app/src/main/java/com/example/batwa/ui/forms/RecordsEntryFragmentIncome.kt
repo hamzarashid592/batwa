@@ -123,12 +123,14 @@ class RecordsEntryFragmentIncome : Fragment() {
 
 //        The on click listeners for the individual keys
         binding.button0.setOnClickListener {
+//            Getting the user input.
+            var userInput = binding.textViewAccountBalanceEntry.text.toString()
 
-//          Do not enable the user to type 0 if there is nothing on the screen.
-            if (binding.textViewAccountBalanceEntry.text != "")
+//          Do not enable the user to type 0 if there is nothing on the screen AND preventing division by 0.
+            if (userInput != "" && userInput[userInput.length - 1] != '/'){
                 binding.textViewAccountBalanceEntry.text =
                     binding.textViewAccountBalanceEntry.text.toString() + '0'
-
+            }
         }
 
         binding.button1.setOnClickListener {
