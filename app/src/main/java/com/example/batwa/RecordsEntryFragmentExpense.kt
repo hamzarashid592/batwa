@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import kotlinx.android.synthetic.main.fragment_records_entry_expense.view.*
-
+import com.example.batwa.databinding.FragmentRecordsEntryExpenseBinding
 
 class RecordsEntryFragmentExpense : Fragment() {
+
+    private var _binding : FragmentRecordsEntryExpenseBinding? = null;
+    private val binding get() = _binding!!
 
     val dbHelper by lazy { DBHelper(context, null) };
     var accounts = ArrayList<String>()
@@ -28,19 +30,18 @@ class RecordsEntryFragmentExpense : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_records_entry_expense, container, false)
-
+        _binding = FragmentRecordsEntryExpenseBinding.inflate(inflater, container, false)
 
 //        -------------------------------------------------------THE OTHER BLOCK-------------------------------------------------------
 
 //        If we get a select account from any fragment
         if (args.selectedAccountName!=null)
-            view.account_selection_record_entry.text=args.selectedAccountName
+            binding.accountSelectionRecordEntry.text=args.selectedAccountName
 
 //        Getting the account list.
-        view.account_selection_record_entry.setOnClickListener {
+        binding.accountSelectionRecordEntry.setOnClickListener {
             val navDirections=RecordsEntryFragmentExpenseDirections.actionRecordsEntryFragmentExpenseToAccountsListFragment()
-            view.findNavController().navigate(navDirections)
+            binding.root.findNavController().navigate(navDirections)
         }
 
 
@@ -50,91 +51,91 @@ class RecordsEntryFragmentExpense : Fragment() {
         var operators = ArrayList<Char>()
 
 //        The on click listeners for the individual keys
-        view.button_0.setOnClickListener {
+        binding.button0.setOnClickListener {
 
 //          Do not enable the user to type 0 if there is nothing on the screen.
-            if (view.text_view_account_balance_entry.text != "")
-                view.text_view_account_balance_entry.text =
-                    view.text_view_account_balance_entry.text.toString() + '0'
+            if (binding.textViewAccountBalanceEntry.text != "")
+                binding.textViewAccountBalanceEntry.text =
+                    binding.textViewAccountBalanceEntry.text.toString() + '0'
 
         }
 
-        view.button_1.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString() + '1'
+        binding.button1.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString() + '1'
         }
 
-        view.button_2.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString() + '2'
+        binding.button2.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString() + '2'
         }
 
-        view.button_3.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString() + '3'
+        binding.button3.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString() + '3'
         }
 
-        view.button_4.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString() + '4'
+        binding.button4.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString() + '4'
         }
 
-        view.button_5.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString() + '5'
+        binding.button5.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString() + '5'
         }
 
-        view.button_6.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString() + '6'
+        binding.button6.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString() + '6'
         }
 
-        view.button_7.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString() + '7'
+        binding.button7.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString() + '7'
         }
 
-        view.button_8.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString() + '8'
+        binding.button8.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString() + '8'
         }
 
-        view.button_9.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString() + '9'
+        binding.button9.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString() + '9'
         }
 
-        view.button_point.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString() + '.'
+        binding.buttonPoint.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString() + '.'
         }
 
-        view.button_backspace.setOnClickListener {
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString().dropLast(1)
+        binding.buttonBackspace.setOnClickListener {
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString().dropLast(1)
 
 //            Setting the hint to 0 if there is no text.
-            if (view.text_view_account_balance_entry.text.length == 0) {
-                view.text_view_account_balance_entry.hint = "0"
+            if (binding.textViewAccountBalanceEntry.text.length == 0) {
+                binding.textViewAccountBalanceEntry.hint = "0"
             }
         }
 
-        view.button_backspace.setOnLongClickListener {
-            var temp = view.text_view_account_balance_entry.text.length
-            view.text_view_account_balance_entry.text =
-                view.text_view_account_balance_entry.text.toString().dropLast(temp + 1)
+        binding. buttonBackspace.setOnLongClickListener {
+            var temp = binding.textViewAccountBalanceEntry.text.length
+            binding.textViewAccountBalanceEntry.text =
+                binding.textViewAccountBalanceEntry.text.toString().dropLast(temp + 1)
 
 //            Setting the hint to 0 if there is no text.
-            view.text_view_account_balance_entry.hint = 0.toString()
+            binding.textViewAccountBalanceEntry.hint = 0.toString()
 
             true
         }
 
 
-        view.button_plus.setOnClickListener {
+        binding.buttonPlus.setOnClickListener {
 
 //            Getting the user input.
-            var userInput = view.text_view_account_balance_entry.text.toString()
+            var userInput = binding.textViewAccountBalanceEntry.text.toString()
 
 //          Do not enable the user to type operator sign if there is nothing on the screen.
 //            Also ensuring whether the user is not typing another operator after an operator
@@ -144,14 +145,14 @@ class RecordsEntryFragmentExpense : Fragment() {
                 && userInput[userInput.length - 1] != '/'
                 && userInput[userInput.length - 1] != '*'
             ) {
-                view.text_view_account_balance_entry.text =
-                    view.text_view_account_balance_entry.text.toString() + '+'
+                binding.textViewAccountBalanceEntry.text =
+                    binding.textViewAccountBalanceEntry.text.toString() + '+'
             }
         }
 
-        view.button_minus.setOnClickListener {
+        binding.buttonMinus.setOnClickListener {
 //            Getting the user input.
-            var userInput = view.text_view_account_balance_entry.text.toString()
+            var userInput = binding.textViewAccountBalanceEntry.text.toString()
 
 //          Do not enable the user to type operator sign if there is nothing on the screen.
 //            Also ensuring whether the user is not typing another operator after an operator
@@ -161,14 +162,14 @@ class RecordsEntryFragmentExpense : Fragment() {
                 && userInput[userInput.length - 1] != '/'
                 && userInput[userInput.length - 1] != '*'
             ) {
-                view.text_view_account_balance_entry.text =
-                    view.text_view_account_balance_entry.text.toString() + '-'
+                binding.textViewAccountBalanceEntry.text =
+                    binding.textViewAccountBalanceEntry.text.toString() + '-'
             }
         }
 
-        view.button_multiply.setOnClickListener {
+        binding.buttonMultiply.setOnClickListener {
 //            Getting the user input.
-            var userInput = view.text_view_account_balance_entry.text.toString()
+            var userInput = binding.textViewAccountBalanceEntry.text.toString()
 
 //          Do not enable the user to type operator sign if there is nothing on the screen.
 //            Also ensuring whether the user is not typing another operator after an operator
@@ -178,15 +179,15 @@ class RecordsEntryFragmentExpense : Fragment() {
                 && userInput[userInput.length - 1] != '/'
                 && userInput[userInput.length - 1] != '*'
             ) {
-                view.text_view_account_balance_entry.text =
-                    view.text_view_account_balance_entry.text.toString() + '*'
+                binding.textViewAccountBalanceEntry.text =
+                    binding.textViewAccountBalanceEntry.text.toString() + '*'
             }
         }
 
-        view.button_divide.setOnClickListener {
+        binding.buttonDivide.setOnClickListener {
 
 //            Getting the user input.
-            var userInput = view.text_view_account_balance_entry.text.toString()
+            var userInput = binding.textViewAccountBalanceEntry.text.toString()
 
 //          Do not enable the user to type operator sign if there is nothing on the screen.
 //            Also ensuring whether the user is not typing another operator after an operator
@@ -196,16 +197,16 @@ class RecordsEntryFragmentExpense : Fragment() {
                 && userInput[userInput.length - 1] != '/'
                 && userInput[userInput.length - 1] != '*'
             ) {
-                view.text_view_account_balance_entry.text =
-                    view.text_view_account_balance_entry.text.toString() + '/'
+                binding.textViewAccountBalanceEntry.text =
+                    binding.textViewAccountBalanceEntry.text.toString() + '/'
             }
         }
 
 //        The equal button
-        view.button_equals.setOnClickListener {
+        binding.buttonEquals.setOnClickListener {
 
 //            Data from the text view.
-            var userInput = view.text_view_account_balance_entry.text.toString()
+            var userInput = binding.textViewAccountBalanceEntry.text.toString()
 
 
 //          Do not enable the user to type equals sign if there is no operand after the operator.
@@ -254,7 +255,7 @@ class RecordsEntryFragmentExpense : Fragment() {
                 }
 
 //            Displaying the result.
-                view.text_view_account_balance_entry.text = answer.toString()
+                binding.textViewAccountBalanceEntry.text = answer.toString()
             }
 
 
@@ -262,7 +263,7 @@ class RecordsEntryFragmentExpense : Fragment() {
 
 
 
-        return view
+        return binding.root
     }
 
 

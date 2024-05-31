@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import kotlinx.android.synthetic.main.fragment_view_pager_income.view.*
-
+import com.example.batwa.databinding.FragmentViewPagerIncomeBinding
 
 class ViewPagerFragmentIncome : Fragment() {
 
+    private var _binding : FragmentViewPagerIncomeBinding? = null
+    private val binding get() = _binding!!
+
 //    The selected account from other fragments.
     val args : ViewPagerFragmentIncomeArgs by navArgs()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,16 +26,15 @@ class ViewPagerFragmentIncome : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view= inflater.inflate(R.layout.fragment_view_pager_income, container, false)
+        _binding = FragmentViewPagerIncomeBinding.inflate(inflater, container, false)
 
-        val fragmentList= arrayListOf(RecordsEntryFragmentIncome(args),
-            TransactionAddEditFragment())
+        val fragmentList= arrayListOf(RecordsEntryFragmentIncome(args), TransactionAddEditFragment())
 
         val viewPagerAdapter=viewPagerAdapter(fragmentList,requireActivity().supportFragmentManager,lifecycle)
 
-        view.viewPager2.adapter=viewPagerAdapter
+        binding.viewPager2.adapter=viewPagerAdapter
 
-        return view
+        return binding.root
     }
 
 }

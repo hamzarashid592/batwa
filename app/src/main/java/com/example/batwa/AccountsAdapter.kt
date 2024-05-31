@@ -7,14 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.lo_account_settings.view.*
-import kotlinx.android.synthetic.main.lo_account_card.view.*
-import kotlinx.android.synthetic.main.lo_account_list.view.*
-import kotlinx.android.synthetic.main.lo_account_settings.view.text_view_account_balance as text_view_account_balance1
-import kotlinx.android.synthetic.main.lo_account_settings.view.text_view_account_name as text_view_account_name1
-import kotlinx.android.synthetic.main.lo_account_card.view.text_view_account_balance as text_view_account_balance2
-import kotlinx.android.synthetic.main.lo_account_card.view.text_view_account_name as text_view_account_name2
-import kotlinx.android.synthetic.main.lo_account_list.view.text_view_account_name as text_view_account_name3
+import com.example.batwa.databinding.LoAccountCardBinding
+import com.example.batwa.databinding.LoAccountListBinding
+import com.example.batwa.databinding.LoAccountSettingsBinding
 
 class AccountsAdapter(
         private val context: Context,
@@ -22,8 +17,22 @@ class AccountsAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-    inner class AccountCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class AccountCardViewHolder(private val binding: LoAccountCardBinding) : RecyclerView.ViewHolder(binding.root) {
         var pos = 0
+
+        fun bind(account: Account, position: Int) {
+            binding.textViewAccountName.text = account.accountName
+            binding.textViewAccountBalance.text = "PKR ${account.accountBalance.toString()}"
+            pos = position
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): AccountCardViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = LoAccountCardBinding.inflate(layoutInflater, parent, false)
+                return AccountCardViewHolder(binding)
+            }
+        }
 
         init {
             itemView.setOnClickListener {
@@ -31,38 +40,59 @@ class AccountsAdapter(
         }
     }
 
-    inner class AccountSettingsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class AccountSettingsViewHolder(private val binding: LoAccountSettingsBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root) {
         var pos = 0
 
-        init {
-            itemView.setOnClickListener {
-                Toast.makeText(context, "NumRecords ${accounts[pos].accountNumRecords} at pos $pos", Toast.LENGTH_SHORT).show()
+        fun bind(account: Account, position: Int) {
+            binding.textViewAccountName.text = account.accountName
+            binding.textViewAccountBalance.text = "PKR ${account.accountBalance.toString()}"
+            pos = position
+
+            binding.root.setOnClickListener {
+                Toast.makeText(context, "NumRecords ${account.accountNumRecords} at pos $pos", Toast.LENGTH_SHORT).show()
+            }
+        }
+        companion object {
+            fun from(parent: ViewGroup, context: Context): AccountSettingsViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = LoAccountSettingsBinding.inflate(layoutInflater, parent, false)
+                return AccountSettingsViewHolder(binding, context)
             }
         }
     }
 
-    inner class AccountListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class AccountListViewHolder(private val binding: LoAccountListBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root) {
         var pos = 0
 
-        init {
-            itemView.setOnClickListener {
+        fun bind(account: Account, position: Int) {
+            binding.textViewAccountName.text = account.accountName
+            pos = position
 
+            binding.root.setOnClickListener {
 //                If the previous fragment is the income records entry fragment, go back to that fragment
-                if(itemView.findNavController().previousBackStackEntry!!.destination.id==R.id.viewPagerFragmentIncome) {
+                if(binding.root.findNavController().previousBackStackEntry!!.destination.id==R.id.viewPagerFragmentIncome) {
                     var navDirections =
                         AccountsListFragmentDirections.actionAccountsListFragmentToViewPagerFragmentIncome(
-                            accounts[pos].accountID!!, accounts[pos].accountName
+                            account.accountID!!, account.accountName
                         )
-                    itemView.findNavController().navigate(navDirections)
+                    binding.root.findNavController().navigate(navDirections)
                 }
 //                vice versa
-                else if(itemView.findNavController().previousBackStackEntry!!.destination.id==R.id.recordsEntryFragmentExpense){
+                else if(binding.root.findNavController().previousBackStackEntry!!.destination.id==R.id.recordsEntryFragmentExpense){
                     var navDirections =
                         AccountsListFragmentDirections.actionAccountsListFragmentToRecordsEntryFragmentExpense(
-                            accounts[pos].accountID!!, accounts[pos].accountName
+                            account.accountID!!, account.accountName
                         )
-                    itemView.findNavController().navigate(navDirections)
+                    binding.root.findNavController().navigate(navDirections)
                 }
+            }
+        }
+
+        companion object {
+            fun from(parent: ViewGroup, context: Context): AccountListViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = LoAccountListBinding.inflate(layoutInflater, parent, false)
+                return AccountListViewHolder(binding, context)
             }
         }
     }
@@ -84,24 +114,18 @@ class AccountsAdapter(
 
         when (viewType) {
             Account.ACCOUNT_CARD -> {
-                view = LayoutInflater.from(context).inflate(R.layout.lo_account_card, parent, false)
-                return AccountCardViewHolder(view)
+                return AccountCardViewHolder.from(parent)
             }
 
             Account.ACCOUNT_LIST -> {
-                view = LayoutInflater.from(context).inflate(R.layout.lo_account_list, parent, false)
-                return AccountListViewHolder(view)
+                return AccountListViewHolder.from(parent, context)
             }
 
             Account.ACCOUNT_SETTINGS -> {
-                view = LayoutInflater.from(context).inflate(R.layout.lo_account_settings, parent, false)
-                return AccountSettingsViewHolder(view)
-            }
-            else->{
-                view = LayoutInflater.from(context).inflate(R.layout.lo_account_card, parent, false)
+                return AccountSettingsViewHolder.from(parent, context)
             }
         }
-        return AccountCardViewHolder(view)
+        return AccountCardViewHolder.from(parent)
     }
 
     override fun getItemCount(): Int {
@@ -109,24 +133,21 @@ class AccountsAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
 //        Setting the account name and balance of the text views in the card layout
         when (accounts[position].type) {
             Account.ACCOUNT_CARD -> {
-                (holder as AccountCardViewHolder).itemView.text_view_account_name2.text = accounts[position].accountName
-                (holder as AccountCardViewHolder).itemView.text_view_account_balance2.text = "PKR ${accounts[position].accountBalance.toString()}"
-                (holder as AccountCardViewHolder).pos=position
+                val account = accounts[position]
+                (holder as AccountCardViewHolder).bind(account, position)
             }
 
             Account.ACCOUNT_LIST->{
-                (holder as AccountListViewHolder).itemView.text_view_account_name3.text = accounts[position].accountName
-                (holder as AccountListViewHolder).pos=position
+                val account = accounts[position]
+                (holder as AccountListViewHolder).bind(account,position)
             }
 
             Account.ACCOUNT_SETTINGS->{
-                (holder as AccountSettingsViewHolder).itemView.text_view_account_name1.text = accounts[position].accountName
-                (holder as AccountSettingsViewHolder).itemView.text_view_account_balance1.text = "PKR ${accounts[position].accountBalance.toString()}"
-                (holder as AccountSettingsViewHolder).pos=position
+                val account = accounts[position]
+                (holder as AccountSettingsViewHolder).bind(account,position)
             }
         }
 

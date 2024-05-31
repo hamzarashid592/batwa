@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_transactions.*
+import com.example.batwa.databinding.FragmentTransactionsBinding
 
 
 class TransactionsFragment : Fragment() {
 
+    private var _binding : FragmentTransactionsBinding? = null;
+    private val binding get() = _binding!!;
 
     private lateinit var dbHelper : DBHelper
     private var transactionsList=ArrayList<Transaction>()
@@ -34,7 +37,8 @@ class TransactionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transactions, container, false)
+        _binding = FragmentTransactionsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,8 +57,8 @@ class TransactionsFragment : Fragment() {
 
         var layoutManager : RecyclerView.LayoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
         var adapter: TransactionsAdapter? = context?.let { TransactionsAdapter(it,transactionsList,accountMap) }
-        fragment_transactions_recycler_view.adapter=adapter
-        fragment_transactions_recycler_view.layoutManager=layoutManager
+        binding.fragmentTransactionsRecyclerView.adapter=adapter
+        binding.fragmentTransactionsRecyclerView.layoutManager=layoutManager
 
     }
 }

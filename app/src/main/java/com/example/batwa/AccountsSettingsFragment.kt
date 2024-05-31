@@ -9,11 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_accounts_settings.*
+import com.example.batwa.databinding.FragmentAccountsSettingsBinding
+import com.example.batwa.databinding.FragmentTransactionAddEditBinding
 
 
 class AccountsSettingsFragment : Fragment() {
 
+    private var _binding: FragmentAccountsSettingsBinding? = null
+    private val binding get() = _binding!!
     private lateinit var dbHelper : DBHelper
     private var accountsList=ArrayList<Account>()
 
@@ -32,7 +35,8 @@ class AccountsSettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_accounts_settings, container, false)
+        _binding = FragmentAccountsSettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,8 +52,8 @@ class AccountsSettingsFragment : Fragment() {
 
         var layoutManager : RecyclerView.LayoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         var adapter: AccountsAdapter? = context?.let { AccountsAdapter(it,accountsList) }
-        accounts_settings_recycler_view.adapter=adapter
-        accounts_settings_recycler_view.layoutManager=layoutManager
+        binding.accountsSettingsRecyclerView.adapter=adapter
+        binding.accountsSettingsRecyclerView.layoutManager=layoutManager
 
     }
 }

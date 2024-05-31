@@ -15,7 +15,7 @@ import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import kotlinx.android.synthetic.main.fragment_transaction_add_edit.view.*
+import com.example.batwa.databinding.FragmentTransactionAddEditBinding
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -25,6 +25,8 @@ class TransactionAddEditFragment : Fragment() {
 
 
     private var accountNames = ArrayList<String>()
+    private var _binding: FragmentTransactionAddEditBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var dbHelper: DBHelper
 
@@ -33,6 +35,10 @@ class TransactionAddEditFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -45,13 +51,8 @@ class TransactionAddEditFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view= inflater.inflate(R.layout.fragment_transaction_add_edit, container, false)
-
-
-
-
-
-        return view
+        _binding = FragmentTransactionAddEditBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 
@@ -80,22 +81,22 @@ class TransactionAddEditFragment : Fragment() {
 
 //            Setting the date
             val decimalFormat=DecimalFormat("00")
-            view.text_view_date.text="${decimalFormat.format(cur_day)}/${decimalFormat.format(cur_month+1)}/$cur_year"
+            binding.textViewDate.text="${decimalFormat.format(cur_day)}/${decimalFormat.format(cur_month+1)}/$cur_year"
 
 //        Setting the time.
             if(cur_hour>12)
-                view.text_view_time.text = "${decimalFormat.format(cur_hour%12)}:${decimalFormat.format(cur_minute)} PM"
+                binding.textViewTime.text = "${decimalFormat.format(cur_hour%12)}:${decimalFormat.format(cur_minute)} PM"
             else
-                view.text_view_time.text = "${decimalFormat.format(cur_hour%12)}:${decimalFormat.format(cur_minute)} AM"
+                binding.textViewTime.text = "${decimalFormat.format(cur_hour%12)}:${decimalFormat.format(cur_minute)} AM"
 
 
-            view.spinner_tran_type.setSelection(1)
+            binding.spinnerTranType.setSelection(1)
 
         }
 
 
 //        ---------------------Defaults for this fragment---------------------
-        view.text_view_date.setOnClickListener{
+        binding.textViewDate.setOnClickListener{
 
 //            Getting the current date.
             val calendar=Calendar.getInstance()
@@ -107,7 +108,7 @@ class TransactionAddEditFragment : Fragment() {
 
                         var decimalFormat=DecimalFormat("00")
 
-                        view.text_view_date.text = "${decimalFormat.format(day)}/${decimalFormat.format(month+1)}/$year"
+                        binding.textViewDate.text = "${decimalFormat.format(day)}/${decimalFormat.format(month+1)}/$year"
                     },
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
@@ -116,7 +117,7 @@ class TransactionAddEditFragment : Fragment() {
             }
         }
 
-        view.text_view_time.setOnClickListener{
+        binding.textViewTime.setOnClickListener{
 
 //            Getting the current date.
             val calendar=Calendar.getInstance()
@@ -129,9 +130,9 @@ class TransactionAddEditFragment : Fragment() {
                         var decimalFormat=DecimalFormat("00")
 
                         if(hour>12)
-                            view.text_view_time.text = "${decimalFormat.format(hour%12)}:${decimalFormat.format(minute)} PM"
+                            binding.textViewTime.text = "${decimalFormat.format(hour%12)}:${decimalFormat.format(minute)} PM"
                         else
-                            view.text_view_time.text = "${decimalFormat.format(hour%12)}:${decimalFormat.format(minute)} AM"
+                            binding.textViewTime.text = "${decimalFormat.format(hour%12)}:${decimalFormat.format(minute)} AM"
                     },
                     calendar.get(Calendar.HOUR_OF_DAY),
                     calendar.get(Calendar.MINUTE),
@@ -149,7 +150,7 @@ class TransactionAddEditFragment : Fragment() {
                 accountNames
             )
         }
-        view.spinner_account.adapter = adapter
+        binding.spinnerAccount.adapter = adapter
 
         //        Populating the spinner for the tran type.
         adapter = context?.let {
@@ -158,7 +159,7 @@ class TransactionAddEditFragment : Fragment() {
                 arrayOf(Transaction.INCOME, Transaction.EXPENSE)
             )
         }
-        view.spinner_tran_type.adapter = adapter
+        binding.spinnerTranType.adapter = adapter
 
     }
 

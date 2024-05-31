@@ -9,12 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_accounts_list.*
-import kotlinx.android.synthetic.main.fragment_accounts_settings.*
+import com.example.batwa.databinding.FragmentAccountsListBinding
+import com.example.batwa.databinding.FragmentTransactionAddEditBinding
 
 
 class AccountsListFragment : Fragment() {
 
+    private var _binding: FragmentAccountsListBinding? = null
+    private val binding get() = _binding!!
     private lateinit var dbHelper : DBHelper
     private var accountsList=ArrayList<Account>()
 
@@ -33,7 +35,8 @@ class AccountsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_accounts_list, container, false)
+        _binding = FragmentAccountsListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,8 +52,8 @@ class AccountsListFragment : Fragment() {
 
         var layoutManager : RecyclerView.LayoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         var adapter: AccountsAdapter? = context?.let { AccountsAdapter(it,accountsList) }
-        accounts_list_recycler_view.adapter=adapter
-        accounts_list_recycler_view.layoutManager=layoutManager
+        binding.accountsListRecyclerView.adapter=adapter
+        binding.accountsListRecyclerView.layoutManager=layoutManager
 
     }
 }
